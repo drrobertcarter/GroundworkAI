@@ -308,6 +308,18 @@
   .coach-link{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 16px 0;padding:10px 14px;border:1px solid var(--accent);border-radius:9px;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none}
   .coach-link:hover{background:var(--accent);color:#1a0f06}
   .vchip{display:inline-block;background:var(--accent-wash);border:1px solid var(--accent-line);color:var(--accent);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;margin:0 7px 7px 0}
+  /* live agent demo */
+  .demo-cols{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;align-items:start}
+  .chat{display:flex;flex-direction:column;gap:10px;min-height:300px;max-height:480px;overflow-y:auto;padding:4px}
+  .chat-empty{color:var(--muted);font-size:13.5px;text-align:center;margin:auto;padding:50px 12px;max-width:42ch}
+  .bub{max-width:88%;padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word}
+  .bub.user{align-self:flex-end;background:var(--accent);color:#1a0f06;border-bottom-right-radius:4px}
+  .bub.bot{align-self:flex-start;background:#120E0B;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+  .bub.typing{color:var(--muted);font-style:italic}
+  .agent-input{display:flex;gap:10px;margin-top:12px}
+  .agent-input textarea{flex:1;min-height:52px;max-height:160px;resize:vertical;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:#120E0B;color:var(--ink);font:inherit}
+  .agent-input textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-wash)}
+  .codeblock{background:#0B0908;border:1px solid var(--line);border-radius:10px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#C7BCAF;overflow-x:auto;white-space:pre;line-height:1.5}
   /* courses of action */
   .coa{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .coacard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column}
@@ -341,7 +353,7 @@
     .compare{grid-template-columns:1fr}.vs-badge{display:none}
     .shell{grid-template-columns:1fr}.rail{display:none}
     .main{padding:18px 16px 90px}
-    .g2,.g3,.roi-out,.kpis,.stages,.crew-grid,.stats,.coa{grid-template-columns:1fr}
+    .g2,.g3,.roi-out,.kpis,.stages,.crew-grid,.stats,.coa,.demo-cols{grid-template-columns:1fr}
     .kpis,.stats{grid-template-columns:1fr 1fr}
     .mtab{display:flex;gap:6px;overflow-x:auto;position:sticky;top:0;z-index:10;background:#0B0908;padding:11px 12px;margin:-18px -16px 18px;border-bottom:1px solid var(--line-2)}
     .mtab button{white-space:nowrap;border:0;background:#1a1410;color:#8A8074;border-radius:8px;padding:9px 13px;font-size:13px;font-weight:600}
@@ -364,6 +376,7 @@
       <a href="#payoff">The payoff</a>
       <a href="#how">How it works</a>
       <a href="#tools">Tools</a>
+      <a href="#agents">Agents</a>
       <a href="#stages">The stages</a>
       <a href="#coaching">Coaching</a>
       <button class="nav-cta" data-enter="profile">Build my plan</button>
@@ -494,6 +507,20 @@
     </div>
   </section>
 
+  <!-- ===== AGENT SUITE ===== -->
+  <section class="section alt" id="agents">
+    <div class="sec-head">
+      <span class="eyebrow">The suite</span>
+      <h2>An Agent for Every Function</h2>
+      <p>Beyond recommending tools, Groundwork AI brings a portfolio of 49 purpose-built agents — across automation, voice, content intelligence, outreach and strategy.</p>
+    </div>
+    <div class="stages" id="agent-cats"></div>
+    <div style="text-align:center;margin-top:40px">
+      <button class="btn" data-enter="agents">Explore the Agent Suite →</button>
+      <button class="btn ghost" data-enter="agentdemo" style="margin-left:10px">Try a live agent</button>
+    </div>
+  </section>
+
   <!-- ===== STAGES ===== -->
   <section class="section" id="stages">
     <div class="sec-head">
@@ -541,7 +568,7 @@
       <a class="home" id="go-home" href="#">__BACK__ Back to home</a>
       <div class="brand"><span class="flame">__FLAME__</span><b>Groundwork<span class="ai"> AI</span><span class="tm">™</span></b></div>
       <nav class="spine" id="spine" aria-label="Strategy stages"></nav>
-      <div class="rail-ref"><button class="step ref" id="rail-catalog"><span class="dot">▤</span><span class="lbl">Tool catalog<small>Browse all tools</small></span></button><button class="step ref" id="rail-playbook"><span class="dot">◆</span><span class="lbl">Integration playbook<small>10 pillars + roadmap</small></span></button><button class="step ref" id="rail-templates"><span class="dot">▦</span><span class="lbl">Industry templates<small>Quick-start stacks</small></span></button></div>
+      <div class="rail-ref"><button class="step ref" id="rail-catalog"><span class="dot">▤</span><span class="lbl">Tool catalog<small>Browse all tools</small></span></button><button class="step ref" id="rail-playbook"><span class="dot">◆</span><span class="lbl">Integration playbook<small>10 pillars + roadmap</small></span></button><button class="step ref" id="rail-templates"><span class="dot">▦</span><span class="lbl">Industry templates<small>Quick-start stacks</small></span></button><button class="step ref" id="rail-agents"><span class="dot">✦</span><span class="lbl">Agent Suite<small>49 built-in agents</small></span></button></div>
       <a class="coach-link" href="mailto:hello@groundwork.ai?subject=Groundwork%20AI%20%E2%80%94%201:1%20Coaching">★ Book 1:1 coaching</a>
       <div class="foot"><small id="progress-label">0 of 6 stages done</small><div class="bar"><i id="progress-bar"></i></div></div>
     </aside>
@@ -734,6 +761,89 @@ const TEMPLATES=[
 {ind:"Food & beverage",sum:"Take orders and questions round the clock, staff smartly, and stay stocked.",moves:["cs1","op2","mk3","mk1","op3"],tools:"Ordering chatbot, scheduling, Canva, inventory forecasting",first:"Automate FAQs and online orders, then tighten staff scheduling."},
 {ind:"Health & wellness",sum:"Fill the calendar, handle intake, and reduce no-shows.",moves:["cs1","op2","cs2","mk1","fn1"],tools:"Booking + AI receptionist, scheduling, email triage",first:"Put booking and reminders on autopilot to cut no-shows and phone tag."}];
 
+const AGENT_CATS=["All","Automation Engines","Sub-Agents","AEO & Content Intelligence","Voice & Conversational AI","Outreach & Data-Extraction","Strategic Research"];
+const AGENT_CAT_DESC={
+"Automation Engines":"End-to-end engines for ops, content, outreach and reporting.",
+"Sub-Agents":"Specialists a manager agent orchestrates into one flow.",
+"AEO & Content Intelligence":"Audit, optimize and track content for AI-era search.",
+"Voice & Conversational AI":"Voice and chat agents for calls, front-desk and support.",
+"Outreach & Data-Extraction":"Scrape, enrich and message prospects at scale.",
+"Strategic Research":"Positioning, opportunity audits and go-to-market."};
+let agentFilter="All";
+const AGENTS=[
+["Automation Engines","Morgan — Project Management Engine","Coordinates project tasks, assignments, deadlines and status across the team; integrates with Slack, Notion, calendars and email."],
+["Automation Engines","Enterprise Second Brain","A centralized AI knowledge and operations hub — run the whole business from one searchable, intelligent system."],
+["Automation Engines","Brand Development Engine","Builds the foundational brand story, ICPs, mission/vision and voice — a prerequisite for most other engines."],
+["Automation Engines","Demand Intel Engine (DIT)","AI-powered ABM lead gen — scrapes LinkedIn Jobs, Indeed, RepVue and PR Newswire, finds high-intent prospects, writes custom icebreakers."],
+["Automation Engines","ConnectIQ (CIQ)","Account and prospect intelligence research automation with a finalized pricing model."],
+["Automation Engines","Thought Leadership Engine","Automates LinkedIn content — scrapes industry insight, writes posts in your voice, schedules publishing."],
+["Automation Engines","ScriptCast Engine","News-to-video automation — turns articles into scripts, human review in a sheet, publishes to four platforms with avatar video."],
+["Automation Engines","SealSync","PandaDoc-integrated proposal generation with CRM sync, real-time engagement tracking and Slack alerts."],
+["Automation Engines","Onboarding Automation","Welcome emails, scheduled onboarding calls, CRM updates and Slack notifications."],
+["Automation Engines","Content Outline Engine — Licensing","Monthly topics, titles and outlines delivered to a client's writing team."],
+["Automation Engines","Content Outline Engine — Built & Managed","Full done-for-you blueprint export of topics and outlines."],
+["Automation Engines","Content Gap Analyzer Engine","Multi-agent engine for competitive content-gap analysis and brief generation."],
+["Automation Engines","Content Gap & Strategic Planning Engine","Phase-2 strategic planning layered on the content-gap engine."],
+["Automation Engines","Quick Wins Engine","AEO-focused content audit — scores existing content and surfaces high-impact top-5 placement opportunities."],
+["Automation Engines","Research Engine","AI research and document analysis with XLSX/DOC/PDF upload support."],
+["Automation Engines","Standard Outreach Automation (GBP)","Scrapes and analyzes Google Business Profiles, builds drip campaigns with dynamic GBP variables."],
+["Automation Engines","Automated Corporate Reporting Engine","Multi-location / franchise reporting consolidating GBP, GA4 and GSC."],
+["Automation Engines","Upwork Automation Engine","Scrapes Upwork for ideal jobs, writes AI icebreakers and populates Airtable."],
+["Sub-Agents","Manager Agent","Orchestrates the full multi-agent flow across an engine."],
+["Sub-Agents","Classification Agent","Ingests XML sitemaps from six competitors and classifies their content against a standard system."],
+["Sub-Agents","Content Gap Agent","Uses GA4, GSC and SEMrush APIs to find whitespace where the client can gain advantage."],
+["Sub-Agents","Content Brief Generator Agent","Produces detailed briefs and outlines for winnable keywords; surfaces overlapping assets."],
+["Sub-Agents","Success Pattern Analyzer Agent","Reverse-engineers why top content wins so internal teams can be trained on it."],
+["AEO & Content Intelligence","EditRight Tool","Grammar, spelling, factual-accuracy and misleading-claims check with a built-in compliance layer."],
+["AEO & Content Intelligence","AEO / GEO Optimizer Tool","URL or bulk-page AEO analysis with severity scoring, full-page rewrite and export."],
+["AEO & Content Intelligence","Prompt Tracker","Tracks AI/LLM visibility, including Google AI Overview."],
+["AEO & Content Intelligence","Content Intelligence Agent","Audits and optimizes existing content libraries using a Keep / Kill / Consolidate method."],
+["AEO & Content Intelligence","AI Implementation Audit Agent","Runs AI-readiness audits."],
+["AEO & Content Intelligence","Entity & Corpus Agent","Custom, organization-specific AEO build."],
+["AEO & Content Intelligence","Technical AEO Audit Agent","Custom AEO-focused technical audit."],
+["AEO & Content Intelligence","Executive Thought Leadership Agent","Custom, organization-specific thought-leadership build."],
+["Voice & Conversational AI","Murphy","Business-ready AI voice agent — outbound calls, front-desk, web/LinkedIn/YouTube scraping, data extraction, email and scheduling."],
+["Voice & Conversational AI","Chloe","Calendar-management sub-agent under Murphy."],
+["Voice & Conversational AI","AI Phone Agent — Q&A + Scheduling","Productized voice agent with a human-like voice; schedules meetings and gathers info."],
+["Voice & Conversational AI","AI Chatbot","Productized chatbot from the current automation catalog."],
+["Voice & Conversational AI","Richland Aesthetics Inbound Agent","Client-specific inbound voice agent, in testing."],
+["Voice & Conversational AI","iBakin Solar — Murphy Mobile","Sales-assistant mobile UI: appointment confirmation, deal tracking, campaign dashboard (prototype)."],
+["Voice & Conversational AI","ToursByLocals Chatbot","FAQ-trained customer chatbot — GPT-4o Mini, multilingual beta, sentiment analysis, memory, auto-tagging dashboard."],
+["Voice & Conversational AI","Daily Coach / Staff Chatbot","Conversational coaching agent for client-staff engagement."],
+["Outreach & Data-Extraction","Website Agent","On-site AI agent for visitor engagement."],
+["Outreach & Data-Extraction","WhatsApp Scraper","Automation and extraction for WhatsApp."],
+["Outreach & Data-Extraction","LinkedIn Portfolio Extractor","Data-extraction tool for LinkedIn."],
+["Outreach & Data-Extraction","News Synthesis Agent","Synthesizes news as part of demand-gen and social revenue solutions."],
+["Outreach & Data-Extraction","B2B Account Intelligence Agent","Revenue-driving account intelligence, paired with news synthesis."],
+["Outreach & Data-Extraction","Automated DMs + Custom Reports","Outreach plus reporting automation."],
+["Strategic Research","Enterprise Growth Strategy","Flagship — market positioning, ICP tiers, buying-committee maps, competitive moats and target-account identification."],
+["Strategic Research","AI Opportunity Audit","Quantifies operational waste (typically $300K–$900K/yr identified) and recommends the AI agents to fix it."],
+["Strategic Research","Competitive Edge","Opportunity-gap scoring with a scored action matrix across competitors."],
+["Strategic Research","Brand Positioning Audit & GTM","Whitespace opportunities, content-strategy roadmap and brand-positioning recommendations."]];
+
+let agentMessages=[],agentLoading=false;
+const VP_PROMPT=`You are a world-class Vice President of Sales for a premier global consulting firm of McKinsey, Bain, BCG, Accenture, Deloitte, PwC, EY, KPMG caliber, with 25+ years of enterprise consulting-sales experience and Harvard Business School executive-education training.
+
+You are not a salesperson. You are a strategic business advisor who helps executives make high-impact decisions that create measurable enterprise value. You do not sell services — you solve business problems, focusing on outcomes, ROI, risk reduction, growth, efficiency, innovation and competitive advantage.
+
+THINKING MODEL (HBS 4.0): Evaluate every opportunity through seven lenses — (1) Strategy: competitive advantage, threats, market shifts; (2) Finance: revenue, margin, cost, cash flow, ROI, shareholder value — always quantify; (3) Leadership: alignment, sponsorship, change readiness, culture; (4) Operations: process effectiveness, productivity, scalability, risk; (5) Technology & AI: transformation, AI adoption, data strategy, modernization; (6) Organizational capability: talent, skills, governance, design; (7) Competitive position: market position, disruption, innovation.
+
+CASE METHOD: Reason through Situation → Problem → Root Cause → Alternatives → Recommendation → Implementation → Expected (measurable) Outcomes.
+
+DISCOVERY: Ask the questions executives wish consultants would ask. CEO: what must be true for this year to be a success; what keeps you up at night; where are you most vulnerable. CFO: where are margins under pressure; what isn't generating expected returns; which investments create the most value. COO: what bottlenecks limit performance; where is inefficiency creating cost; what prevents scaling. CIO/CTO: which legacy systems constrain the business; where can AI create measurable value; what tech risks concern leadership.
+
+SELLING: Never lead with services. Lead with business outcomes, strategic priorities, financial impact, competitive advantage and risk mitigation — only then discuss solutions.
+
+QUALIFICATION SCORING (weights): Strategic importance 25%, Financial impact 25%, Executive sponsorship 15%, Urgency 15%, Budget availability 10%, Competitive position 10%. When qualifying, give a score out of 100, win probability, revenue potential, expansion potential and risk assessment.
+
+VALUE MODEL: For recommendations estimate Revenue Growth, Cost Savings, Risk Reduction and Strategic Value, quantified where possible.
+
+OUTPUT FRAMEWORK for an opportunity: Executive Summary; Business Challenge; Strategic Impact; Key Stakeholders; Qualification Assessment; Recommended Approach; Potential Consulting Services; Estimated Opportunity Value; Risks and Obstacles; Next Best Actions.
+
+COMMUNICATION: Executive-focused, consultative, insight-driven, precise, concise, data-oriented — as if presenting to a CEO, board or investment committee. Never pressure, manipulate, oversell, make unsupported claims, or recommend a solution before understanding the problem. Avoid vendor language, buzzwords and jargon.
+
+DEMO MODE: This is a short interactive demonstration. Keep responses focused and well-structured; when asked for a deliverable, produce it concisely using clear executive headings. If you lack details, state the 2–3 assumptions you are making and proceed.`;
+
 /* ---------- helpers ---------- */
 const $=s=>document.querySelector(s);
 const money=n=>"$"+Math.round(n).toLocaleString("en-US");
@@ -766,9 +876,11 @@ function renderNav(){
   const rc=$("#rail-catalog");if(rc){rc.className="step ref"+(state.view==="catalog"?" active":"");rc.onclick=()=>go("catalog");}
   const rp=$("#rail-playbook");if(rp){rp.className="step ref"+(state.view==="playbook"?" active":"");rp.onclick=()=>go("playbook");}
   const rt=$("#rail-templates");if(rt){rt.className="step ref"+(state.view==="templates"?" active":"");rt.onclick=()=>go("templates");}
+  const ra=$("#rail-agents");if(ra){ra.className="step ref"+(state.view==="agents"?" active":"");ra.onclick=()=>go("agents");}
   const mc=document.createElement("button");mc.className="mtab-ref"+(state.view==="catalog"?" active":"");mc.textContent="▤ Catalog";mc.onclick=()=>go("catalog");mtab.appendChild(mc);
   const mp=document.createElement("button");mp.className="mtab-ref"+(state.view==="playbook"?" active":"");mp.textContent="◆ Playbook";mp.onclick=()=>go("playbook");mtab.appendChild(mp);
   const mt=document.createElement("button");mt.className="mtab-ref"+(state.view==="templates"?" active":"");mt.textContent="▦ Templates";mt.onclick=()=>go("templates");mtab.appendChild(mt);
+  const ma=document.createElement("button");ma.className="mtab-ref"+(state.view==="agents"?" active":"");ma.textContent="✦ Agents";ma.onclick=()=>go("agents");mtab.appendChild(ma);
 }
 function go(id){state.view=id;render();window.scrollTo({top:0,behavior:"smooth"});}
 
@@ -1083,13 +1195,98 @@ function viewTemplates(){
   <p class="illus-note" style="text-align:left;margin-top:16px">Applying a template pre-selects its moves on your opportunity map — nothing is locked, swap freely.</p>
   <div class="nav-actions"><button class="pbtn ghost" onclick="go('dashboard')">← Snapshot</button><button class="pbtn ghost" onclick="go('playbook')">Integration playbook →</button></div>`;}
 
+function viewAgents(){
+  return `<div class="view-head"><div class="eyebrow">The suite</div><h2>Agent Suite</h2>
+    <p>A portfolio of purpose-built AI agents and automation engines across six disciplines — the baseline for strategic execution and operational efficiency. ${AGENTS.length} agents in all.</p></div>
+  <div class="card" style="margin-bottom:18px"><div class="eyebrow">First, a definition</div>
+    <h3 style="font-size:23px;margin:6px 0 0;font-family:'Playfair Display',serif">What is an AI agent?</h3>
+    <p style="color:var(--text);margin:10px 0 16px;max-width:72ch">An AI agent is software that pursues a goal on your behalf. You give it an objective — not step-by-step instructions — and it reads the context, decides what to do, takes actions through tools (email, CRM, phone calls, data), checks the result, and adapts. That autonomy is what separates an agent from a chatbot that only answers, or an automation that only follows fixed rules.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <div class="vet"><b>Assistant</b><span>Responds when asked — a chatbot.</span></div>
+      <div class="vet"><b>Automation</b><span>Follows fixed, preset rules.</span></div>
+      <div class="vet" style="border-color:var(--accent-line)"><b style="color:var(--accent)">Agent</b><span>Goal-directed: chooses steps and uses tools to get there.</span></div>
+      <div class="vet"><b>Multi-agent</b><span>A manager agent orchestrating specialists.</span></div>
+    </div></div>
+  <div class="card" style="margin-bottom:18px;border-color:var(--accent-line)"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+    <div><div class="eyebrow">See one live</div><h3 style="font-size:21px;margin-top:6px;font-family:'Playfair Display',serif">Talk to a working agent — VP of Sales</h3><p style="color:var(--text);margin:6px 0 0;max-width:60ch">A real, running agent on a Harvard-Business-School-4.0 strategic-selling prompt. Try it, then see exactly how it integrates.</p></div>
+    <button class="pbtn" onclick="go('agentdemo')">Open live demo →</button></div></div>
+  <input type="text" id="agent-search" class="cat-search" placeholder="Search agents — e.g. voice, content, outreach, reporting…">
+  <div class="filters" id="agent-chips">${AGENT_CATS.map(c=>`<button class="chip" aria-pressed="${agentFilter===c}" data-acat="${esc(c)}">${c}</button>`).join("")}</div>
+  <p class="cat-count" id="agent-count"></p>
+  <div class="catgrid" id="agent-results"></div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('dashboard')">← Snapshot</button><button class="pbtn ghost" onclick="go('catalog')">Third-party tools →</button></div>`;}
+
+function renderAgentResults(){
+  const box=$("#agent-results");if(!box)return;
+  const q=(($("#agent-search")||{}).value||"").trim().toLowerCase();
+  const list=AGENTS.filter(a=>(agentFilter==="All"||a[0]===agentFilter)&&(!q||(a[1]+" "+a[2]+" "+a[0]).toLowerCase().includes(q)));
+  const cc=$("#agent-count");if(cc)cc.textContent=list.length+" of "+AGENTS.length+" agents"+(agentFilter!=="All"?" in "+agentFilter:"")+(q?` matching “${q}”`:"");
+  box.innerHTML=list.length?list.map(a=>`<div class="catcard"><div class="fn">${a[0]}</div><h4>${a[1]}</h4><p class="best">${a[2]}</p></div>`).join(""):`<div class="empty" style="grid-column:1/-1">No agents match that search. Try a broader term or another category.</div>`;
+}
+
+function viewAgentDemo(){
+  const SCN=[
+    ["Discovery plan","We're a $200M industrial manufacturer losing share to lower-cost overseas competitors. Build me a discovery call plan for the CEO."],
+    ["Opportunity assessment","A regional bank's CIO wants to 'explore AI' but has no defined initiative yet. Produce an opportunity assessment."],
+    ["Qualify a deal","A CFO is interested in our cost-transformation work but says there's no budget this year. Qualify this and give next best actions."],
+    ["Board briefing","Prepare a board-level briefing on a proposed digital transformation for a $1B retailer."]];
+  return `<div class="view-head"><div class="eyebrow">Agent in action</div><h2>VP of Sales — live demo</h2>
+    <p>A real, running AI agent: a VP of Sales built on a Harvard-Business-School-4.0 strategic-selling system prompt. Give it a business scenario and watch it reason like a consulting partner, not a vendor.</p></div>
+  <div class="demo-cols">
+    <div class="card">
+      <div class="chat" id="agent-chat"></div>
+      <div class="chips" style="margin-top:12px">${SCN.map(s=>`<button class="chip" data-scn="${esc(s[1])}">${s[0]}</button>`).join("")}</div>
+      <div class="agent-input"><textarea id="agent-text" placeholder="Describe a prospect or ask for a deliverable… (Enter to send)"></textarea><button class="pbtn" id="agent-send">Send</button></div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Integrate it</div>
+      <h3 style="font-size:18px;margin:6px 0 10px;font-family:Inter;color:var(--ink)">How this agent plugs in</h3>
+      <p style="font-size:13.5px;color:var(--text);margin:0 0 12px">An agent is a system prompt (its identity, thinking model and output framework) called over an API. Connect it to your data and tools and it stops advising and starts acting.</p>
+      <div class="codeblock">await fetch("https://api.anthropic.com/v1/messages",{
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    model: "claude-sonnet-4-6",
+    system: VP_SALES_PROMPT,  // the agent
+    messages: conversation    // the dialogue
+  })
+});</div>
+      <p style="font-size:13px;color:var(--text);margin:14px 0 6px"><b style="color:var(--ink)">Give it tools</b> so it acts, not just advises:</p>
+      <ul style="margin:0 0 12px;padding-left:18px;color:var(--text);font-size:13px"><li>CRM — read accounts, log opportunities</li><li>Calendar &amp; email — book meetings, draft follow-ups</li><li>Data warehouse — pull live financials for ROI models</li><li>Proposal tools — generate &amp; track documents</li></ul>
+      <div class="callout"><span>◆</span><div style="font-size:12.5px">In this preview the API call is handled for you. Deployed, route it through your own backend with an API key — then add the tools above.</div></div>
+    </div>
+  </div>
+  <details style="margin-top:18px"><summary style="cursor:pointer;color:var(--accent);font-weight:600;font-size:14px">View the agent's system prompt (its full definition)</summary><div class="codeblock" style="margin-top:10px;white-space:pre-wrap;max-height:320px;overflow:auto">${esc(VP_PROMPT)}</div></details>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('agents')">← Agent Suite</button><button class="pbtn ghost" onclick="go('dashboard')">Snapshot →</button></div>`;}
+
+function renderAgentChat(){
+  const box=document.getElementById("agent-chat");if(!box)return;
+  let html=agentMessages.length?agentMessages.map(m=>`<div class="bub ${m.role==="user"?"user":"bot"}">${esc(m.content)}</div>`).join(""):`<div class="chat-empty">Pick a scenario below or type your own — the VP of Sales agent will respond like a consulting partner.</div>`;
+  if(agentLoading)html+=`<div class="bub bot typing">Thinking like a senior partner…</div>`;
+  box.innerHTML=html;box.scrollTop=box.scrollHeight;
+}
+async function sendAgent(text){
+  if(!text||agentLoading)return;
+  agentMessages.push({role:"user",content:text});agentLoading=true;renderAgentChat();
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:VP_PROMPT,messages:agentMessages})});
+    const data=await res.json();
+    const reply=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+    agentMessages.push({role:"assistant",content:reply||"(no response returned)"});
+  }catch(e){
+    agentMessages.push({role:"assistant",content:"⚠️ The live agent couldn't respond in this environment. Inside the Claude preview it runs automatically; on a deployed site, route this call through your own backend with an API key. ("+e.message+")"});
+  }
+  agentLoading=false;renderAgentChat();
+}
+
 function notReady(t,h,d){return `<div class="view-head"><div class="eyebrow">Locked</div><h2>${h}</h2><p>${d}</p></div>
   <div class="card"><div class="empty">This stage builds on an earlier one.</div></div>
   <div class="nav-actions"><span></span><button class="pbtn" onclick="go('${t}')">Go there →</button></div>`;}
 
 function render(){renderNav();const v=state.view;
   const html=v==="profile"?viewProfile():v==="readiness"?viewReadiness():v==="strategy"?viewStrategy()
-    :v==="opportunities"?viewOpportunities():v==="roadmap"?viewRoadmap():v==="stack"?viewStack():v==="roi"?viewROI():v==="coa"?viewCOA():v==="catalog"?viewCatalog():v==="playbook"?viewPlaybook():v==="templates"?viewTemplates():viewDashboard();
+    :v==="opportunities"?viewOpportunities():v==="roadmap"?viewRoadmap():v==="stack"?viewStack():v==="roi"?viewROI():v==="coa"?viewCOA():v==="catalog"?viewCatalog():v==="playbook"?viewPlaybook():v==="templates"?viewTemplates():v==="agents"?viewAgents():v==="agentdemo"?viewAgentDemo():viewDashboard();
   $("#canvas").innerHTML=html;wire();}
 
 function wire(){
@@ -1106,6 +1303,18 @@ function wire(){
   const rhr=$("#roi-hourly");if(rhr)rhr.oninput=e=>{state.profile.hourly=e.target.value;render();};
   document.querySelectorAll("[data-commit]").forEach(b=>b.onclick=()=>{state.coa=b.dataset.commit;render();});
   document.querySelectorAll("[data-tmpl]").forEach(b=>b.onclick=()=>{const t=TEMPLATES[+b.dataset.tmpl];state.selected=new Set(t.moves);state.roi.touched=false;go("opportunities");});
+  if(state.view==="agentdemo"){
+    renderAgentChat();
+    const send=()=>{const ta=document.getElementById("agent-text");if(ta&&ta.value.trim()){const v=ta.value.trim();ta.value="";sendAgent(v);}};
+    const sb=$("#agent-send");if(sb)sb.onclick=send;
+    const ta=$("#agent-text");if(ta)ta.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}};
+    document.querySelectorAll("[data-scn]").forEach(b=>b.onclick=()=>sendAgent(b.dataset.scn));
+  }
+  if(state.view==="agents"){
+    const s=$("#agent-search");if(s)s.oninput=()=>renderAgentResults();
+    document.querySelectorAll("[data-acat]").forEach(b=>b.onclick=()=>{agentFilter=b.dataset.acat;document.querySelectorAll("[data-acat]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.acat===agentFilter));renderAgentResults();});
+    renderAgentResults();
+  }
   if(state.view==="catalog"){
     const s=$("#cat-search");if(s)s.oninput=()=>renderCatalogResults();
     document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{catFilter=b.dataset.cat;document.querySelectorAll("[data-cat]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===catFilter));renderCatalogResults();});
@@ -1133,6 +1342,7 @@ function buildLanding(){
   $("#stage-grid").innerHTML=sg.map(([n,h,p])=>`<div class="stage"><div class="num">${n}</div><h4>${h}</h4><p>${p}</p></div>`).join("");
   $("#tool-chips").innerHTML=Object.values(TOOLS).map(t=>`<div class="tchip"><b>${t.name}</b><span>${t.bestFor}</span></div>`).join("");
   const pg=$("#pillar-grid");if(pg)pg.innerHTML=PILLARS.map(p=>`<div class="pillar"><div class="pnum">${p[0]}</div><h4>${p[1]}</h4><p class="pwhat">${p[2]}</p></div>`).join("");
+  const ag=$("#agent-cats");if(ag)ag.innerHTML=AGENT_CATS.filter(c=>c!=="All").map(c=>{const n=AGENTS.filter(a=>a[0]===c).length;return `<div class="stage"><div class="num">${n}</div><h4>${c}</h4><p>${AGENT_CAT_DESC[c]||""}</p></div>`;}).join("");
   // enter buttons
   document.querySelectorAll("[data-enter]").forEach(b=>b.onclick=()=>enterApp(b.dataset.enter));
   $("#go-home").onclick=e=>{e.preventDefault();goHome();};
