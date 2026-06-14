@@ -295,6 +295,19 @@
   .rail-ref{padding:6px 0;margin-top:6px;border-top:1px solid var(--line-2)}
   .step.ref .dot{font-size:14px;color:var(--accent)}
   .step.ref.active .dot{background:var(--accent);color:#1a0f06}
+  /* playbook + coaching */
+  .pillar{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+  .pillar .pnum{font-family:"Playfair Display",serif;font-style:italic;font-size:30px;color:var(--accent);line-height:1}
+  .pillar h4{font-size:16px;font-weight:700;font-family:Inter,sans-serif;color:var(--ink);margin:0}
+  .pillar .pwhat{font-size:13.5px;color:var(--text);margin:0;flex:1}
+  .pillar .ppit{font-size:12.5px;color:var(--muted);margin:0;border-top:1px solid var(--line-2);padding-top:8px}
+  .pillar .ppit b{color:var(--accent-bright)}
+  .roadsteps{display:flex;flex-wrap:wrap;gap:10px}
+  .rstep{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px 8px 8px;font-size:13.5px;color:var(--ink);font-weight:500}
+  .rstep .rn{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#1a0f06;display:grid;place-items:center;font-weight:700;font-size:12px;flex:none}
+  .coach-link{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 16px 0;padding:10px 14px;border:1px solid var(--accent);border-radius:9px;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none}
+  .coach-link:hover{background:var(--accent);color:#1a0f06}
+  .vchip{display:inline-block;background:var(--accent-wash);border:1px solid var(--accent-line);color:var(--accent);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;margin:0 7px 7px 0}
   /* courses of action */
   .coa{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .coacard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column}
@@ -352,6 +365,7 @@
       <a href="#how">How it works</a>
       <a href="#tools">Tools</a>
       <a href="#stages">The stages</a>
+      <a href="#coaching">Coaching</a>
       <button class="nav-cta" data-enter="profile">Build my plan</button>
     </div>
     <button class="nav-burger" data-enter="profile" aria-label="Open the planner">Start →</button>
@@ -492,6 +506,21 @@
     </div>
   </section>
 
+  <!-- ===== COACHING ===== -->
+  <section class="section alt" id="coaching">
+    <div class="sec-head">
+      <span class="eyebrow">Beyond the plan</span>
+      <h2>1:1 Coaching</h2>
+      <p>The planner hands you a strategy. Coaching gets you a running system — a guide who works the nine pillars of a real integration with you, in the right order. Because automation that lasts is a business transformation, not a software install.</p>
+    </div>
+    <div class="grid g3" id="pillar-grid"></div>
+    <div style="text-align:center;margin-top:42px">
+      <p style="color:var(--text);margin:0 0 18px">Remote 60–90 minute sessions, from process mapping to go-live.</p>
+      <a class="btn" href="mailto:hello@groundwork.ai?subject=Groundwork%20AI%20%E2%80%94%201:1%20Coaching">Book a 1:1 session →</a>
+      <button class="btn ghost" data-enter="playbook" style="margin-left:10px">See the playbook</button>
+    </div>
+  </section>
+
   <div class="cta-band">
     <span class="eyebrow">Ready when you are</span>
     <h2 style="margin-top:16px">Build your plan in one sitting</h2>
@@ -512,7 +541,8 @@
       <a class="home" id="go-home" href="#">__BACK__ Back to home</a>
       <div class="brand"><span class="flame">__FLAME__</span><b>Groundwork<span class="ai"> AI</span><span class="tm">™</span></b></div>
       <nav class="spine" id="spine" aria-label="Strategy stages"></nav>
-      <div class="rail-ref"><button class="step ref" id="rail-catalog"><span class="dot">▤</span><span class="lbl">Tool catalog<small>Browse all tools</small></span></button></div>
+      <div class="rail-ref"><button class="step ref" id="rail-catalog"><span class="dot">▤</span><span class="lbl">Tool catalog<small>Browse all tools</small></span></button><button class="step ref" id="rail-playbook"><span class="dot">◆</span><span class="lbl">Integration playbook<small>10 pillars + roadmap</small></span></button><button class="step ref" id="rail-templates"><span class="dot">▦</span><span class="lbl">Industry templates<small>Quick-start stacks</small></span></button></div>
+      <a class="coach-link" href="mailto:hello@groundwork.ai?subject=Groundwork%20AI%20%E2%80%94%201:1%20Coaching">★ Book 1:1 coaching</a>
       <div class="foot"><small id="progress-label">0 of 6 stages done</small><div class="bar"><i id="progress-bar"></i></div></div>
     </aside>
     <main class="main">
@@ -663,6 +693,47 @@ const CATALOG=[
 ["Finance & spend","Expensify / Zoho Expense","Expense capture","From ~$0-9/user","Per-seat","Hours","Receipt scan and categorization","Expense-only"],
 ["Finance & spend","Quicken Business & Personal","Solo expense + tax","$4.99/mo","Subscription","Hours","Schedule C categories, mileage tracking","Sole proprietors"]];
 
+const COACH="mailto:hello@groundwork.ai?subject=Groundwork%20AI%20%E2%80%94%201:1%20Coaching";
+const PILLARS=[
+["1","Process documentation","Map how work actually gets done today — leads, invoicing, inventory, support — before automating anything.","Inconsistent processes, not technology, are usually the real obstacle."],
+["2","Technology assessment","Decide what to automate, what stays human, what unused features you already own, and whether AI, workflow automation or plain software fits.","Buying new tools before optimizing what you already have."],
+["3","Integration support","Connect CRM, accounting, e-commerce, scheduling, marketing and payments into one flow of information.","Automation fails when systems don't talk to each other."],
+["4","Data cleanup & standardization","Fix duplicate records, inconsistent naming, missing fields and disconnected databases.","Projects often spend more time cleaning data than building workflows."],
+["5","AI & automation strategy","Aim AI where it pays most: support, scheduling, lead qualification, content, reporting, forecasting.","Not every process benefits equally from AI."],
+["6","Training & change management","Train staff, explain changing roles, and show automation is helping them, not replacing them.","Employee resistance is often a bigger challenge than the technology."],
+["7","Cybersecurity & compliance","Set access controls, data privacy, backups, regulatory compliance and AI governance policies.","Automating a bad security practice just scales the problem."],
+["8","Financial planning","Weigh upfront cost, subscriptions, expected ROI, productivity gains and hiring implications.","Treat automation as an investment, not a one-off tech purchase."],
+["9","Monitoring & optimization","Run dashboards, error monitoring, workflow tweaks, regular audits and AI model reviews.","Automation isn't one-and-done — the best businesses keep refining."],
+["10","Human-in-the-loop design","Decide what must keep a person in the loop — complex escalations, unusual transactions, disputes, high-value clients.","The strongest systems pair automation with human judgement, not replace it."]];
+const ROADMAP_STEPS=["Document processes","Automate repetitive admin work","Integrate core systems","Add AI for customer-facing & decision-support tasks","Monitor results","Scale automation gradually"];
+const VISION_DIMS=["Hiring","Customer experience","Pricing models","Growth plans","Competitive strategy"];
+const METRICS=[
+["Hours saved / week","The core time dividend — what you reclaim for billable or strategic work."],
+["Revenue per employee","Whether automation makes the team more productive, not just busier."],
+["Customer response time","How fast you reply now vs. before — a direct driver of win rate and retention."],
+["Error / rework rate","Mistakes caught or avoided as manual handling drops."],
+["Customer satisfaction (CSAT / reviews)","Whether faster, automated service helps or hurts the experience."],
+["Profit margin","The bottom line — automation should widen it, not just add subscriptions."]];
+const FUNDING=[
+["Tax incentives","Deductions for software and equipment (e.g. Section 179 expensing) can offset upfront cost."],
+["Small-business grants","Federal, state and local grants for technology adoption and modernization."],
+["Low-interest financing","SBA-backed and similar loans spread implementation cost over time."],
+["Digitization / tech-adoption programs","Some states and agencies subsidize small-business digital upgrades."],
+["Workforce development funding","Training grants can cover the staff up-skilling side of a rollout."],
+["Industry & utility rebates","Sector incentives (e.g. energy-efficiency rebates for trades) can fund adjacent work."]];
+const PEERS=[
+["Mentorship (SCORE / SBDC)","Free 1:1 mentoring and advising for small businesses."],
+["Chambers & local business groups","Local peers who've solved the same problems — plus referrals."],
+["Industry associations & roundtables","Sector-specific case studies and benchmarks."],
+["Automation user communities","Online groups where owners share working workflows and templates."],
+["Case studies","Real before/after examples cut uncertainty and speed adoption."]];
+const TEMPLATES=[
+{ind:"Trades / home services",sum:"Insulation, HVAC, plumbing, landscaping — win the jobs you're missing and quote faster.",moves:["cs1","sl2","sl1","op2","fn1"],tools:"AI receptionist (Rosie / Goodcall), instant quoting, scheduling & routing, Brex",first:"Stop missing calls — put an AI receptionist on the phones and instant quotes on the website."},
+{ind:"Retail / E-commerce",sum:"Answer shoppers 24/7, keep stock right, and market without a team.",moves:["cs1","mk1","op3","pr1","fn1"],tools:"Tidio Lyro, HubSpot / Jasper, inventory forecasting, Brex",first:"Add a support chatbot that handles order questions and hands off the tricky ones."},
+{ind:"Professional services",sum:"Cut admin, turn proposals around fast, and never lose a meeting action item.",moves:["cs2","sl2","it1","sl3","fn2"],tools:"HubSpot, Fireflies, QuickBooks / Brex",first:"Triage the inbox and auto-draft replies so client comms stop eating your day."},
+{ind:"Food & beverage",sum:"Take orders and questions round the clock, staff smartly, and stay stocked.",moves:["cs1","op2","mk3","mk1","op3"],tools:"Ordering chatbot, scheduling, Canva, inventory forecasting",first:"Automate FAQs and online orders, then tighten staff scheduling."},
+{ind:"Health & wellness",sum:"Fill the calendar, handle intake, and reduce no-shows.",moves:["cs1","op2","cs2","mk1","fn1"],tools:"Booking + AI receptionist, scheduling, email triage",first:"Put booking and reminders on autopilot to cut no-shows and phone tag."}];
+
 /* ---------- helpers ---------- */
 const $=s=>document.querySelector(s);
 const money=n=>"$"+Math.round(n).toLocaleString("en-US");
@@ -693,7 +764,11 @@ function renderNav(){
   const dc=Object.entries(done).filter(([k,v])=>k!=="dashboard"&&v).length;const tot=STEPS.length-1;
   $("#progress-label").textContent=dc+" of "+tot+" stages done";$("#progress-bar").style.width=(dc/tot*100)+"%";
   const rc=$("#rail-catalog");if(rc){rc.className="step ref"+(state.view==="catalog"?" active":"");rc.onclick=()=>go("catalog");}
+  const rp=$("#rail-playbook");if(rp){rp.className="step ref"+(state.view==="playbook"?" active":"");rp.onclick=()=>go("playbook");}
+  const rt=$("#rail-templates");if(rt){rt.className="step ref"+(state.view==="templates"?" active":"");rt.onclick=()=>go("templates");}
   const mc=document.createElement("button");mc.className="mtab-ref"+(state.view==="catalog"?" active":"");mc.textContent="▤ Catalog";mc.onclick=()=>go("catalog");mtab.appendChild(mc);
+  const mp=document.createElement("button");mp.className="mtab-ref"+(state.view==="playbook"?" active":"");mp.textContent="◆ Playbook";mp.onclick=()=>go("playbook");mtab.appendChild(mp);
+  const mt=document.createElement("button");mt.className="mtab-ref"+(state.view==="templates"?" active":"");mt.textContent="▦ Templates";mt.onclick=()=>go("templates");mtab.appendChild(mt);
 }
 function go(id){state.view=id;render();window.scrollTo({top:0,behavior:"smooth"});}
 
@@ -922,7 +997,11 @@ function viewDashboard(){const c=completion(),score=readinessScore(),p=state.pro
         <button class="addbtn" style="padding:5px 11px;font-size:12.5px" onclick="go('${id}')">${c[id]?"Review":"Do this"}</button></div>`).join("")}</div>
     <div class="card"><h3 style="font-size:18px;margin-bottom:12px;font-family:Inter;color:var(--ink)">Your next 3 moves</h3>
       ${total?`<ol class="priolist" style="margin:0;padding-left:20px">${OPPS.filter(o=>state.selected.has(o.id)).sort((a,b)=>({Low:0,Med:1,High:2})[a.effort]-({Low:0,Med:1,High:2})[b.effort]).slice(0,3).map(o=>`<li><b>${o.title}</b><br><span class="seq">${o.fn} · ${o.effort} effort · ~${o.hrs}h/wk</span></li>`).join("")}</ol>
-      <button class="pbtn ghost" style="margin-top:16px;padding:10px 16px" onclick="go('roadmap')">Open full roadmap →</button>`:'<div class="empty">Add opportunities to your plan to see your next moves.</div>'}</div></div>`;}
+      <button class="pbtn ghost" style="margin-top:16px;padding:10px 16px" onclick="go('roadmap')">Open full roadmap →</button>`:'<div class="empty">Add opportunities to your plan to see your next moves.</div>'}</div></div>
+  <div class="card" style="margin-top:18px;border-color:var(--accent-line)"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div><div class="eyebrow">Need a hand executing?</div><h3 style="font-size:20px;margin-top:6px;font-family:'Playfair Display',serif">1:1 coaching &amp; the integration playbook</h3>
+    <p style="color:var(--text);margin:6px 0 0;max-width:58ch">Nine pillars from process docs to monitoring — with a guide who works them with you.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="addbtn" onclick="go('playbook')">Open playbook</button><a class="pbtn" href="${COACH}" style="text-decoration:none;padding:9px 16px">Book coaching →</a></div></div></div>`;}
 
 function viewCatalog(){
   return `<div class="view-head"><div class="eyebrow">Reference — the toolbox</div><h2>AI tool catalog</h2>
@@ -946,13 +1025,71 @@ function renderCatalogResults(){
   </div>`).join(""):`<div class="empty" style="grid-column:1/-1">No tools match that search. Try a broader term or another category.</div>`;
 }
 
+function viewPlaybook(){
+  return `<div class="view-head"><div class="eyebrow">Reference — execution</div><h2>Integration playbook</h2>
+    <p>Your plan tells you what to do; this is how small businesses actually pull it off. Nine pillars of a real AI &amp; automation integration, plus the practical order to tackle them. The ones that succeed treat it as a business transformation — technology, training, process redesign and leadership together — not a software install.</p></div>
+  <div class="card" style="margin-bottom:18px;border-color:var(--accent-line)"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="flex:1;min-width:240px"><div class="eyebrow">Want a guide?</div><h3 style="font-size:23px;margin-top:6px;font-family:'Playfair Display',serif">1:1 coaching across all nine pillars</h3>
+      <p style="color:var(--text);margin:8px 0 0;max-width:60ch">Remote 60–90 minute sessions that take you from a plan to a running system — process mapping, tool selection, integration, data cleanup, staff training and governance.</p></div>
+    <a class="pbtn" href="${COACH}" style="text-decoration:none">Book a 1:1 session →</a></div></div>
+  <h3 style="font-size:21px;margin:24px 0 14px;font-family:'Playfair Display',serif">The nine pillars</h3>
+  <div class="grid g3">${PILLARS.map(p=>`<div class="pillar"><div class="pnum">${p[0]}</div><h4>${p[1]}</h4><p class="pwhat">${p[2]}</p><p class="ppit"><b>Watch out:</b> ${p[3]}</p></div>`).join("")}</div>
+  <h3 style="font-size:21px;margin:30px 0 14px;font-family:'Playfair Display',serif">Practical roadmap</h3>
+  <div class="roadsteps">${ROADMAP_STEPS.map((s,i)=>`<div class="rstep"><span class="rn">${i+1}</span><span>${s}</span></div>`).join("")}</div>
+  <div class="card" style="margin-top:24px"><div class="callout"><span>◆</span><div>Each pillar above is where projects stall — and exactly what 1:1 coaching is built to get you through. Pair it with your plan, your tool stack and your courses of action.</div></div></div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('dashboard')">← Snapshot</button><a class="pbtn" href="${COACH}" style="text-decoration:none">Book 1:1 coaching →</a></div>`;}
+
+function viewPlaybook(){
+  return `<div class="view-head"><div class="eyebrow">Reference — execution</div><h2>Integration playbook</h2>
+    <p>Your plan tells you what to do; this is how small businesses actually pull it off — the vision, the pillars, the metrics, the money, and the people. The ones that succeed treat it as a business transformation, not a software install.</p></div>
+  <div class="card" style="margin-bottom:18px"><div class="eyebrow">The biggest question</div>
+    <h3 style="font-size:23px;margin:6px 0 0;font-family:'Playfair Display',serif">Don't ask what you can automate — ask what your business becomes</h3>
+    <p style="color:var(--text);margin:10px 0 0;max-width:66ch">The sharp question isn't "what can I automate?" It's: <b style="color:var(--ink)">what should this business look like when automation handles 50–80% of routine work?</b> That vision reshapes everything downstream —</p>
+    <div style="margin-top:13px">${VISION_DIMS.map(x=>`<span class="vchip">${x}</span>`).join("")}</div></div>
+  <div class="card" style="margin-bottom:18px;border-color:var(--accent-line)"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="flex:1;min-width:240px"><div class="eyebrow">Want a guide?</div><h3 style="font-size:23px;margin-top:6px;font-family:'Playfair Display',serif">1:1 coaching across all ten pillars</h3>
+      <p style="color:var(--text);margin:8px 0 0;max-width:60ch">Remote 60–90 minute sessions that take you from a plan to a running system — process mapping, tool selection, integration, data cleanup, staff training and governance.</p></div>
+    <a class="pbtn" href="${COACH}" style="text-decoration:none">Book a 1:1 session →</a></div></div>
+  <h3 style="font-size:21px;margin:24px 0 14px;font-family:'Playfair Display',serif">The ten pillars</h3>
+  <div class="grid g3">${PILLARS.map(p=>`<div class="pillar"><div class="pnum">${p[0]}</div><h4>${p[1]}</h4><p class="pwhat">${p[2]}</p><p class="ppit"><b>Watch out:</b> ${p[3]}</p></div>`).join("")}</div>
+  <div class="card" style="margin-top:18px"><div class="callout"><span>◆</span><div><b>Overwhelmed by tool choices?</b> The problem is rarely too few options — it's too many. Your <button class="addbtn" style="padding:4px 10px" onclick="go('stack')">Tool stack</button> and the <button class="addbtn" style="padding:4px 10px" onclick="go('catalog')">62-tool catalog</button> are your independent shortlist — vendor selection, handled.</div></div></div>
+  <h3 style="font-size:21px;margin:30px 0 14px;font-family:'Playfair Display',serif">Practical roadmap</h3>
+  <div class="roadsteps">${ROADMAP_STEPS.map((s,i)=>`<div class="rstep"><span class="rn">${i+1}</span><span>${s}</span></div>`).join("")}</div>
+  <h3 style="font-size:21px;margin:30px 0 12px;font-family:'Playfair Display',serif">Success metrics — what "working" looks like</h3>
+  <p style="color:var(--text);margin:0 0 14px">Without metrics, automation becomes a cost centre instead of a strategic investment. Track these:</p>
+  <div class="grid g2">${METRICS.map(m=>`<div class="vet"><b>${m[0]}</b><span>${m[1]}</span></div>`).join("")}</div>
+  <h3 style="font-size:21px;margin:30px 0 12px;font-family:'Playfair Display',serif">Funding & incentives</h3>
+  <p style="color:var(--text);margin:0 0 14px">For many small firms, financing is a bigger barrier than the technology itself. Where to look:</p>
+  <div class="grid g2">${FUNDING.map(f=>`<div class="vet"><b>${f[0]}</b><span>${f[1]}</span></div>`).join("")}</div>
+  <div class="callout warn" style="margin-top:12px"><span>!</span><div>Programs, eligibility and amounts change constantly — confirm what's currently available with your accountant, local SBDC, or a state economic-development agency before counting on it.</div></div>
+  <h3 style="font-size:21px;margin:30px 0 12px;font-family:'Playfair Display',serif">Peer learning</h3>
+  <p style="color:var(--text);margin:0 0 14px">Owners trust other owners — real examples cut uncertainty and speed adoption:</p>
+  <div class="grid g2">${PEERS.map(p=>`<div class="vet"><b>${p[0]}</b><span>${p[1]}</span></div>`).join("")}</div>
+  <div class="card" style="margin-top:24px"><div class="callout"><span>◆</span><div>Every pillar above is where projects stall — and exactly what 1:1 coaching is built to get you through. Pair it with your plan, your tool stack and your courses of action.</div></div></div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('templates')">Industry templates →</button><a class="pbtn" href="${COACH}" style="text-decoration:none">Book 1:1 coaching →</a></div>`;}
+
+function viewTemplates(){
+  return `<div class="view-head"><div class="eyebrow">Reference — quick start</div><h2>Industry templates</h2>
+    <p>Prebuilt starting stacks so you don't build from scratch. Pick the one closest to your business and apply it — the moves drop straight onto your opportunity map, ready to tweak.</p></div>
+  <div class="grid g2">${TEMPLATES.map((t,i)=>{
+    const moves=t.moves.map(id=>{const o=OPPS.find(x=>x.id===id);return o?o.title:id;});
+    return `<div class="card"><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700">${t.ind}</div>
+      <p style="color:var(--text);margin:8px 0 14px">${t.sum}</p>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:6px">Starter moves</div>
+      <ul style="margin:0 0 14px;padding-left:18px;color:var(--ink)">${moves.map(m=>`<li style="margin-bottom:3px">${m}</li>`).join("")}</ul>
+      <div class="hint" style="margin:0 0 12px"><b style="color:var(--ink)">Tools:</b> ${t.tools}</div>
+      <div class="callout" style="margin:0 0 14px"><span>◆</span><div><b>First step:</b> ${t.first}</div></div>
+      <button class="pbtn" data-tmpl="${i}">Apply this template →</button></div>`;}).join("")}</div>
+  <p class="illus-note" style="text-align:left;margin-top:16px">Applying a template pre-selects its moves on your opportunity map — nothing is locked, swap freely.</p>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('dashboard')">← Snapshot</button><button class="pbtn ghost" onclick="go('playbook')">Integration playbook →</button></div>`;}
+
 function notReady(t,h,d){return `<div class="view-head"><div class="eyebrow">Locked</div><h2>${h}</h2><p>${d}</p></div>
   <div class="card"><div class="empty">This stage builds on an earlier one.</div></div>
   <div class="nav-actions"><span></span><button class="pbtn" onclick="go('${t}')">Go there →</button></div>`;}
 
 function render(){renderNav();const v=state.view;
   const html=v==="profile"?viewProfile():v==="readiness"?viewReadiness():v==="strategy"?viewStrategy()
-    :v==="opportunities"?viewOpportunities():v==="roadmap"?viewRoadmap():v==="stack"?viewStack():v==="roi"?viewROI():v==="coa"?viewCOA():v==="catalog"?viewCatalog():viewDashboard();
+    :v==="opportunities"?viewOpportunities():v==="roadmap"?viewRoadmap():v==="stack"?viewStack():v==="roi"?viewROI():v==="coa"?viewCOA():v==="catalog"?viewCatalog():v==="playbook"?viewPlaybook():v==="templates"?viewTemplates():viewDashboard();
   $("#canvas").innerHTML=html;wire();}
 
 function wire(){
@@ -968,6 +1105,7 @@ function wire(){
   const rh=$("#roi-hours");if(rh)rh.oninput=e=>{state.roi.hours=Number(e.target.value);state.roi.touched=true;render();};
   const rhr=$("#roi-hourly");if(rhr)rhr.oninput=e=>{state.profile.hourly=e.target.value;render();};
   document.querySelectorAll("[data-commit]").forEach(b=>b.onclick=()=>{state.coa=b.dataset.commit;render();});
+  document.querySelectorAll("[data-tmpl]").forEach(b=>b.onclick=()=>{const t=TEMPLATES[+b.dataset.tmpl];state.selected=new Set(t.moves);state.roi.touched=false;go("opportunities");});
   if(state.view==="catalog"){
     const s=$("#cat-search");if(s)s.oninput=()=>renderCatalogResults();
     document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{catFilter=b.dataset.cat;document.querySelectorAll("[data-cat]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===catFilter));renderCatalogResults();});
@@ -994,6 +1132,7 @@ function buildLanding(){
     ["VIII","Courses of action","Three ways to phase it — weighed on cost, schedule, performance and opportunity cost, then committed."]];
   $("#stage-grid").innerHTML=sg.map(([n,h,p])=>`<div class="stage"><div class="num">${n}</div><h4>${h}</h4><p>${p}</p></div>`).join("");
   $("#tool-chips").innerHTML=Object.values(TOOLS).map(t=>`<div class="tchip"><b>${t.name}</b><span>${t.bestFor}</span></div>`).join("");
+  const pg=$("#pillar-grid");if(pg)pg.innerHTML=PILLARS.map(p=>`<div class="pillar"><div class="pnum">${p[0]}</div><h4>${p[1]}</h4><p class="pwhat">${p[2]}</p></div>`).join("");
   // enter buttons
   document.querySelectorAll("[data-enter]").forEach(b=>b.onclick=()=>enterApp(b.dataset.enter));
   $("#go-home").onclick=e=>{e.preventDefault();goHome();};
