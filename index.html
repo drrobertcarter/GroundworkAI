@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groundwork AI™ — Put AI to Work in Your Small Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100D0B;
+    --bg-2:#15110D;
+    --card:#1A1410;
+    --card-2:#221A13;
+    --line:rgba(243,237,228,.09);
+    --line-2:rgba(243,237,228,.055);
+    --ink:#F4EEE5;
+    --text:#C7BCAF;
+    --muted:#897E72;
+    --accent:#E8853A;
+    --accent-bright:#F4A35C;
+    --accent-deep:#C56A28;
+    --accent-wash:rgba(232,133,58,.13);
+    --accent-line:rgba(232,133,58,.28);
+    --warn:#C2522F;
+    --ember:#FF6B2C;
+    --shadow:0 30px 70px -40px rgba(0,0,0,.9);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Playfair Display",Georgia,serif;color:var(--ink);margin:0;font-weight:700;line-height:1.05}
+  button{font-family:inherit;cursor:pointer}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#1a0f06}
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:3px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+  .serif-i{font-style:italic;font-weight:600}
+
+  /* ===================== TOP NAV ===================== */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(20px,4vw,56px);
+    transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{background:rgba(16,13,11,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+  .nav .logo{display:flex;align-items:center;gap:11px}
+  .nav .flame{width:26px;height:26px;flex:none}
+  .nav .logo b{font-family:"Playfair Display",serif;font-size:21px;color:var(--ink);font-weight:700}
+  .logo b .ai,.brand b .ai{color:var(--accent)}
+  .tm{font-size:.46em;vertical-align:.75em;font-family:"Inter",sans-serif;font-weight:600;letter-spacing:.02em;color:var(--muted);margin-left:1px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14.5px;color:var(--text);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{background:var(--accent);color:#1a0f06;font-weight:600;font-size:14.5px;padding:10px 20px;border:0;border-radius:8px;transition:.15s}
+  .nav-cta:hover{background:var(--accent-bright);transform:translateY(-1px)}
+  .nav-burger{display:none;background:none;border:0;color:var(--ink);font-size:22px}
+
+  /* ===================== HERO ===================== */
+  .hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden;padding:120px 20px 80px}
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background:radial-gradient(130% 90% at 50% 118%, #4a2509 0%, #2a1709 30%, #160f0a 60%, #100D0B 100%);}
+  .hero-bg .ember{position:absolute;left:50%;bottom:-14%;width:88%;height:70%;transform:translateX(-50%);
+    background:radial-gradient(ellipse at center,rgba(255,107,44,.42),rgba(255,107,44,.10) 45%,transparent 68%);filter:blur(46px)}
+  .hero-bg .grate{position:absolute;left:50%;bottom:-20%;width:120%;height:80%;transform:translateX(-50%);
+    background:repeating-radial-gradient(ellipse at 50% 100%,transparent 0 26px,rgba(0,0,0,.22) 26px 30px);opacity:.5;mask-image:radial-gradient(ellipse at 50% 100%,#000 30%,transparent 72%)}
+  .smoke{position:absolute;bottom:30%;width:240px;height:240px;border-radius:50%;
+    background:radial-gradient(circle,rgba(214,198,178,.13),transparent 62%);filter:blur(34px);opacity:0;animation:rise 15s linear infinite}
+  .smoke.s1{left:34%;animation-delay:0s}
+  .smoke.s2{left:50%;width:300px;height:300px;animation-delay:5s}
+  .smoke.s3{left:60%;width:200px;animation-delay:9s}
+  @keyframes rise{0%{transform:translateY(60px) scale(.7);opacity:0}18%{opacity:.55}100%{transform:translateY(-300px) scale(1.5);opacity:0}}
+  .grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.045;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero-inner{position:relative;z-index:2;max-width:920px}
+  .hero .eyebrow{display:block;margin-bottom:24px}
+  .hero h1{font-size:clamp(52px,9.5vw,128px);font-weight:700;letter-spacing:-.015em}
+  .hero h1 .o{color:var(--accent);display:block}
+  .hero p.sub{max-width:620px;margin:26px auto 0;font-size:clamp(16px,2.2vw,20px);color:var(--text);line-height:1.6}
+  .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#1a0f06;font-weight:600;
+    border:0;border-radius:10px;padding:15px 28px;font-size:16px;transition:.16s}
+  .btn:hover{background:var(--accent-bright);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{background:rgba(243,237,228,.05);border-color:var(--accent-line)}
+  .btn.sm{padding:11px 18px;font-size:14px;border-radius:9px}
+  .scroll-cue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;text-align:center;color:var(--muted)}
+  .scroll-cue span{font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+  .scroll-cue .chev{display:block;margin-top:8px;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  /* ===================== SECTIONS ===================== */
+  .section{padding:clamp(70px,10vw,120px) clamp(20px,5vw,56px);max-width:1240px;margin:0 auto}
+  .section.alt{background:var(--bg-2)}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto clamp(40px,6vw,64px)}
+  .sec-head .eyebrow{display:block;margin-bottom:18px}
+  .sec-head h2{font-size:clamp(34px,5.5vw,60px);font-weight:700}
+  .sec-head p{margin:18px auto 0;font-size:17px;color:var(--text);max-width:560px}
+
+  /* comparison cards */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+  .ccard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .ccard.ai{border-color:var(--accent-line);box-shadow:0 0 0 1px var(--accent-line),0 40px 80px -50px rgba(232,133,58,.35)}
+  .ccard.ai::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 70% at 80% -10%,var(--accent-wash),transparent 55%);pointer-events:none}
+  .ic-tile{width:54px;height:54px;border-radius:13px;display:grid;place-items:center;background:var(--accent-wash);color:var(--accent);position:relative}
+  .ccard .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:22px 0 8px}
+  .ccard.ai .kicker{color:var(--accent)}
+  .ccard h3{font-size:clamp(24px,3vw,30px);font-weight:700}
+  .ccard .desc{margin:14px 0 0;color:var(--text);font-size:15px;line-height:1.6}
+  .ccard .rule{height:1px;background:var(--line);margin:24px 0}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .stat .lab{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px}
+  .stat .val{font-family:"Playfair Display",serif;font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--ink);line-height:1}
+  .ccard.ai .stat .val{color:var(--accent)}
+  .stat .unit{font-size:13px;color:var(--muted);font-weight:600;font-family:"Inter",sans-serif;margin-left:3px}
+  .vs-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
+    width:54px;height:54px;border-radius:50%;background:var(--bg);border:1px solid var(--accent-line);
+    display:grid;place-items:center;font-family:"Playfair Display",serif;font-style:italic;color:var(--accent);font-size:18px}
+
+  /* AI crew strip */
+  .crew{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3vw,34px)}
+  .crew-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:8px}
+  .crew-top h3{font-size:23px}
+  .crew-top .delta{font-size:14px;color:var(--accent);font-weight:600}
+  .crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  .crew-item{display:flex;gap:13px;align-items:flex-start}
+  .crew-item .ci{width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;background:var(--accent-wash);color:var(--accent)}
+  .crew-item b{color:var(--ink);font-weight:600;font-size:14.5px;display:block}
+  .crew-item span{font-size:13px;color:var(--text)}
+  .illus-note{margin-top:22px;font-size:12.5px;color:var(--muted);text-align:center}
+
+  /* stages list */
+  .stages{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .stage{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:.18s}
+  .stage:hover{border-color:var(--accent-line);transform:translateY(-3px)}
+  .stage .num{font-family:"Playfair Display",serif;font-style:italic;font-size:34px;color:var(--accent);line-height:1}
+  .stage h4{font-size:19px;margin:12px 0 8px;font-weight:700}
+  .stage p{font-size:14px;color:var(--text);margin:0}
+  .tool-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(208px,1fr));gap:14px}
+  .tchip{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px 18px;transition:.16s}
+  .tchip:hover{border-color:var(--accent-line);transform:translateY(-2px)}
+  .tchip b{display:block;color:var(--ink);font-family:"Playfair Display",serif;font-size:19px;font-weight:600}
+  .tchip span{display:block;font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.4}
+
+  .cta-band{text-align:center;background:linear-gradient(180deg,var(--bg-2),var(--bg));border-top:1px solid var(--line-2);padding:clamp(70px,9vw,110px) 20px}
+  .cta-band h2{font-size:clamp(32px,5vw,54px)}
+  .cta-band p{max-width:520px;margin:18px auto 30px;color:var(--text);font-size:17px}
+
+  footer{padding:34px clamp(20px,5vw,56px);border-top:1px solid var(--line-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:13px}
+
+  /* ===================== APP SHELL ===================== */
+  #app{display:none}
+  #app.on{display:block}
+  .shell{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+  .rail{background:#0B0908;border-right:1px solid var(--line-2);padding:24px 0 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+  .rail .home{display:flex;align-items:center;gap:9px;padding:0 24px 18px;color:var(--muted);font-size:13px}
+  .rail .home:hover{color:var(--ink)}
+  .brand{padding:0 24px 20px;display:flex;align-items:center;gap:10px}
+  .brand .flame{width:24px;height:24px;flex:none}
+  .brand b{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink)}
+  .spine{position:relative;padding:6px 0;flex:1}
+  .spine::before{content:"";position:absolute;left:39px;top:30px;bottom:30px;width:2px;background:linear-gradient(var(--accent-deep),#2a201a);opacity:.5}
+  .step{position:relative;display:flex;align-items:center;gap:13px;width:100%;background:none;border:0;color:#8A8074;padding:11px 24px;text-align:left;font-size:14px;font-weight:500;transition:color .15s}
+  .step .dot{width:30px;height:30px;border-radius:50%;flex:none;z-index:1;background:#0B0908;border:2px solid #34291f;display:grid;place-items:center;font-size:12px;font-weight:700;color:#8A8074;transition:.18s}
+  .step .lbl{display:flex;flex-direction:column;line-height:1.15}
+  .step .lbl small{font-size:10.5px;letter-spacing:.03em;color:#6B6155}
+  .step:hover{color:var(--ink)}
+  .step.active{color:var(--ink)}
+  .step.active .dot{background:var(--accent);border-color:var(--accent);color:#1a0f06;box-shadow:0 0 0 4px rgba(232,133,58,.2)}
+  .step.done .dot{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+  .step.done .dot::after{content:"✓"}.step.done .dot span{display:none}
+  .rail .foot{padding:14px 24px 0;border-top:1px solid var(--line-2);margin-top:8px}
+  .rail .foot small{font-size:11px;color:var(--muted)}
+  .rail .foot .bar{height:6px;border-radius:4px;background:#241b14;overflow:hidden;margin-top:8px}
+  .rail .foot .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+  .main{min-width:0;padding:34px clamp(20px,4vw,52px) 80px;max-width:1160px}
+  .view-head{margin-bottom:24px}
+  .view-head .eyebrow{font-size:12px}
+  .view-head h2{font-size:clamp(28px,4vw,42px);margin:10px 0 8px;font-weight:700}
+  .view-head p{color:var(--text);max-width:64ch;margin:0;font-size:15.5px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:var(--shadow)}
+  .card + .card{margin-top:18px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+
+  label.field{display:block;margin-bottom:16px}
+  label.field > span{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+  label.field > span em{color:var(--muted);font-weight:400;font-style:normal}
+  input[type=text],input[type=number],select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:#120E0B;font:inherit;color:var(--ink)}
+  input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-wash)}
+  select option{background:#1a1410}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:5px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);background:#120E0B;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:500;color:var(--text);transition:.13s}
+  .chip:hover{border-color:var(--accent-line);color:var(--ink)}
+  .chip[aria-pressed=true]{background:var(--accent);color:#1a0f06;border-color:var(--accent)}
+
+  .dim{padding:18px 0;border-bottom:1px solid var(--line-2)}.dim:last-child{border-bottom:0}
+  .dim h4{font-size:15.5px;font-weight:700;font-family:"Inter",sans-serif;color:var(--ink)}
+  .dim p{margin:3px 0 12px;color:var(--text);font-size:13.5px}
+  .levels{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .levels button{border:1px solid var(--line);background:#120E0B;border-radius:9px;padding:10px 6px;font-size:12px;color:var(--muted);font-weight:600;line-height:1.25;transition:.12s}
+  .levels button:hover{border-color:var(--accent-line);color:var(--text)}
+  .levels button[aria-pressed=true]{background:var(--accent-deep);color:#fff;border-color:var(--accent-deep)}
+  .levels button .n{display:block;font-size:14px;color:var(--ink)}
+  .levels button[aria-pressed=true] .n{color:#fff}
+
+  .gauge{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+  .dial{position:relative;width:170px;height:170px;flex:none}
+  .dial svg{transform:rotate(-90deg)}
+  .dial .read{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .dial .read b{font-family:"Playfair Display",serif;font-size:48px;line-height:1;color:var(--ink)}
+  .dial .read small{font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+  .tier{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;background:var(--accent-wash);color:var(--accent)}
+
+  .filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .opp{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px;display:flex;flex-direction:column;gap:10px;transition:.14s}
+  .opp.in{border-color:var(--accent-line);box-shadow:0 0 0 1px var(--accent-line)}
+  .opp .fn{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .opp h4{font-size:16px;font-weight:700;font-family:"Inter",sans-serif;color:var(--ink)}
+  .opp p{margin:0;font-size:13.5px;color:var(--text);flex:1}
+  .meta{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-size:11px;font-weight:700;padding:4px 9px;border-radius:6px;letter-spacing:.02em}
+  .tag.impact-High{background:rgba(232,133,58,.16);color:var(--accent)}
+  .tag.impact-Med{background:rgba(243,237,228,.08);color:var(--text)}
+  .tag.effort{background:rgba(232,133,58,.1);color:var(--accent-bright)}
+  .tag.hrs{background:rgba(243,237,228,.06);color:var(--muted)}
+  .addbtn{border:1px solid var(--line);background:#120E0B;color:var(--ink);border-radius:8px;padding:9px;font-weight:600;font-size:13.5px;transition:.13s}
+  .addbtn:hover{border-color:var(--accent)}
+  .opp.in .addbtn{background:var(--accent);border-color:var(--accent);color:#1a0f06}
+
+  .phase{margin-bottom:22px}
+  .phase-h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--accent-line)}
+  .phase-h h3{font-size:20px;font-weight:700}
+  .phase-h .when{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.04em}
+  .task{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line-2)}.task:last-child{border-bottom:0}
+  .task input{margin-top:3px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+  .task .body strong{font-size:14.5px;font-weight:600;display:block;color:var(--ink)}
+  .task .body span{font-size:13px;color:var(--muted)}
+  .task.checked .body strong{text-decoration:line-through;color:var(--muted)}
+  .empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;font-size:14px}
+
+  .roi-out{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+  .pstat{background:#120E0B;border:1px solid var(--line);border-radius:12px;padding:18px}
+  .pstat small{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .pstat b{display:block;font-family:"Playfair Display",serif;font-size:32px;margin-top:6px;line-height:1;color:var(--ink)}
+  .pstat.good b{color:var(--accent)}
+  .pstat .sub{font-size:12px;color:var(--muted);margin-top:5px}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+  .kpi small{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kpi b{display:block;font-family:"Playfair Display",serif;font-size:36px;margin-top:8px;line-height:1;color:var(--ink)}
+  .kpi .u{font-size:14px;color:var(--muted)}
+  .priolist li{margin-bottom:10px}.priolist b{color:var(--ink);font-weight:600}
+  .seq{font-size:12px;color:var(--muted)}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;background:var(--accent-wash);border:1px solid var(--accent-line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;font-size:13.5px;color:#f0d9c4}
+  .callout.warn{background:rgba(194,82,47,.12);border-color:rgba(194,82,47,.4);border-left-color:var(--warn);color:#f0c4b3}
+  .nav-actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px;flex-wrap:wrap}
+  /* tool fit meters + vetting */
+  .fit{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+  .fit-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .fit-l{font-size:11px;color:var(--muted);font-weight:600}
+  .fit-d{display:flex;gap:4px}
+  .fit-d i{width:8px;height:8px;border-radius:50%;background:var(--line);display:inline-block}
+  .fit-d i.on{background:var(--accent)}
+  .vet{background:#120E0B;border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+  .vet b{display:block;color:var(--ink);font-size:14px}
+  .vet span{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+  /* tool catalog */
+  .cat-search{width:100%;max-width:420px;margin-bottom:14px}
+  .cat-count{font-size:12.5px;color:var(--muted);margin:0 0 14px}
+  .catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:16px}
+  .catcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+  .catcard .fn{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .catcard h4{font-size:17px;font-weight:700;font-family:Inter,sans-serif;color:var(--ink);margin:0}
+  .catcard .best{font-size:13.5px;color:var(--text);margin:0}
+  .csp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .csp > div{background:var(--card);padding:9px 11px}
+  .csp .l{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .csp .v{font-size:12.5px;color:var(--ink);font-weight:600;margin-top:3px;line-height:1.3}
+  .catperf{font-size:13px;color:var(--text);margin:0}
+  .catperf b{color:var(--ink);font-weight:600}
+  .catnote{font-size:12px;color:var(--muted);margin:0;border-top:1px solid var(--line-2);padding-top:9px}
+  .rail-ref{padding:6px 0;margin-top:6px;border-top:1px solid var(--line-2)}
+  .step.ref .dot{font-size:14px;color:var(--accent)}
+  .step.ref.active .dot{background:var(--accent);color:#1a0f06}
+  /* courses of action */
+  .coa{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .coacard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column}
+  .coacard.rec{border-color:var(--accent-line)}
+  .coacard.committed{box-shadow:0 0 0 2px var(--accent);border-color:var(--accent)}
+  .rec-badge{position:absolute;top:0;right:18px;transform:translateY(-50%);background:var(--accent);color:#1a0f06;font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 11px;border-radius:999px}
+  .coa-tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .coacard h3{font-size:24px;margin-top:8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .coacard h3 span{font-family:"Inter",sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);border-radius:6px;padding:2px 8px}
+  .coa-sum{margin:12px 0 0;font-size:13.5px;color:var(--text);min-height:56px}
+  .coa-factors{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:18px 0}
+  .factor{background:var(--card);padding:13px 14px}
+  .factor.opp{background:rgba(232,133,58,.06)}
+  .flab{display:block;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:5px}
+  .fval{font-family:"Playfair Display",serif;font-size:20px;color:var(--ink);line-height:1.05;display:block}
+  .fval small{display:block;font-family:"Inter",sans-serif;font-size:11px;color:var(--muted);font-weight:500;margin-top:3px;letter-spacing:0}
+  .factor.opp .fval{color:var(--accent)}
+  .coa-trade{font-size:13px;color:var(--text);margin:0 0 18px;flex:1}
+  .coa-commit{border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:9px;padding:11px;font-weight:600;font-size:14px;transition:.13s}
+  .coa-commit:hover{border-color:var(--accent);color:var(--accent)}
+  .coacard.committed .coa-commit{background:var(--accent);border-color:var(--accent);color:#1a0f06}
+  .pbtn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#1a0f06;border:0;border-radius:10px;padding:13px 22px;font-weight:600;font-size:15px;transition:.14s}
+  .pbtn:hover{background:var(--accent-bright);transform:translateY(-1px)}
+  .pbtn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .pbtn.ghost:hover{border-color:var(--accent-line)}
+
+  .mtab{display:none}
+  @media(max-width:980px){.stages,.crew-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:880px){
+    .nav-links{display:none}.nav-burger{display:block}
+    .compare{grid-template-columns:1fr}.vs-badge{display:none}
+    .shell{grid-template-columns:1fr}.rail{display:none}
+    .main{padding:18px 16px 90px}
+    .g2,.g3,.roi-out,.kpis,.stages,.crew-grid,.stats,.coa{grid-template-columns:1fr}
+    .kpis,.stats{grid-template-columns:1fr 1fr}
+    .mtab{display:flex;gap:6px;overflow-x:auto;position:sticky;top:0;z-index:10;background:#0B0908;padding:11px 12px;margin:-18px -16px 18px;border-bottom:1px solid var(--line-2)}
+    .mtab button{white-space:nowrap;border:0;background:#1a1410;color:#8A8074;border-radius:8px;padding:9px 13px;font-size:13px;font-weight:600}
+    .mtab button.active{background:var(--accent);color:#1a0f06}
+    .mtab .mtab-home{background:#0B0908;border:1px solid var(--accent-line);color:var(--ink);position:sticky;left:0;flex:none;box-shadow:6px 0 8px -4px #0B0908}
+    .mtab .mtab-ref{border:1px solid var(--accent-line);background:#1a1410;color:var(--accent)}
+    .mtab .mtab-ref.active{background:var(--accent);color:#1a0f06}
+    .mtab button.done::before{content:"✓ ";color:var(--accent-bright)}.mtab button.active.done::before{color:#1a0f06}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ===================== LANDING ===================== -->
+<div id="landing">
+  <nav class="nav" id="topnav">
+    <a class="logo" href="#top"><span class="flame">__FLAME__</span><b>Groundwork<span class="ai"> AI</span><span class="tm">™</span></b></a>
+    <div class="nav-links">
+      <a href="#payoff">The payoff</a>
+      <a href="#how">How it works</a>
+      <a href="#tools">Tools</a>
+      <a href="#stages">The stages</a>
+      <button class="nav-cta" data-enter="profile">Build my plan</button>
+    </div>
+    <button class="nav-burger" data-enter="profile" aria-label="Open the planner">Start →</button>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="grate"></div>
+      <div class="smoke s1"></div><div class="smoke s2"></div><div class="smoke s3"></div>
+      <div class="ember"></div>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <span class="eyebrow">The small-business playbook</span>
+      <h1>Put AI to Work<span class="o">in Your Business</span></h1>
+      <p class="sub">Low effort. Real payoff. No jargon. Groundwork AI walks one-person shops and small teams from a blank page to a costed, sequenced AI plan you can actually run.</p>
+      <div class="hero-actions">
+        <button class="btn" data-enter="profile">Build my plan →</button>
+        <a class="btn ghost" href="#payoff">See the payoff</a>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span>Scroll</span><span class="chev">⌄</span></div>
+  </header>
+
+  <!-- ===== PAYOFF: insulation comparison ===== -->
+  <section class="section" id="payoff">
+    <div class="sec-head">
+      <span class="eyebrow">One business, two ways</span>
+      <h2>What AI Actually Changes</h2>
+      <p>The same solo insulation contractor — one drowning in after-hours admin, one with an AI crew handling the busywork. Still one person. Very different week.</p>
+    </div>
+    <div class="compare">
+      <article class="ccard">
+        <span class="ic-tile">__ICON_HAND__</span>
+        <div class="kicker">Doing it all by hand</div>
+        <h3>The Typical Operator</h3>
+        <p class="desc">Sprays foam all day, then quotes, invoices, schedules and chases leads every evening. Calls go to voicemail mid-job, so warm leads cool off and quotes trickle out a day or two late.</p>
+        <div class="rule"></div>
+        <div class="stats">
+          <div class="stat"><div class="lab">Admin / week</div><div class="val" data-count="15">15<span class="unit">hrs</span></div></div>
+          <div class="stat"><div class="lab">Leads kept</div><div class="val" data-count="6">6<span class="unit">in 10</span></div></div>
+          <div class="stat"><div class="lab">Quote time</div><div class="val">1–2<span class="unit">days</span></div></div>
+        </div>
+        <div class="rule"></div>
+        <div class="stats">
+          <div class="stat"><div class="lab">Jobs / month</div><div class="val" data-count="12">12</div></div>
+          <div class="stat"><div class="lab">After 6pm</div><div class="val" style="font-size:20px">Paperwork</div></div>
+          <div class="stat"><div class="lab">Marketing</div><div class="val" style="font-size:20px">Word of mouth</div></div>
+        </div>
+      </article>
+
+      <article class="ccard ai">
+        <span class="ic-tile">__ICON_SPARK__</span>
+        <div class="kicker">Same person, AI crew</div>
+        <h3>Fully AI-Integrated</h3>
+        <p class="desc">An AI receptionist answers and books while the foam gun is running. Quotes generate from a few photos in minutes, follow-ups send themselves, and the books are reconciled before the truck's unloaded.</p>
+        <div class="rule"></div>
+        <div class="stats">
+          <div class="stat"><div class="lab">Admin / week</div><div class="val" data-count="3">3<span class="unit">hrs</span></div></div>
+          <div class="stat"><div class="lab">Leads kept</div><div class="val" data-count="95">95<span class="unit">%</span></div></div>
+          <div class="stat"><div class="lab">Quote time</div><div class="val" data-count="10">10<span class="unit">min</span></div></div>
+        </div>
+        <div class="rule"></div>
+        <div class="stats">
+          <div class="stat"><div class="lab">Jobs / month</div><div class="val" data-count="20">20</div></div>
+          <div class="stat"><div class="lab">After 6pm</div><div class="val" style="font-size:20px;color:var(--accent)">Free</div></div>
+          <div class="stat"><div class="lab">Marketing</div><div class="val" style="font-size:20px;color:var(--accent)">Always on</div></div>
+        </div>
+      </article>
+      <div class="vs-badge">vs</div>
+    </div>
+
+    <!-- AI crew -->
+    <div class="crew">
+      <div class="crew-top">
+        <h3>The crew is software</h3>
+        <span class="delta">≈ 12 hrs/week back · ~60% more jobs · same headcount</span>
+      </div>
+      <p style="color:var(--text);font-size:14.5px;max-width:680px;margin:6px 0 0">Each tool below replaces a job that used to eat the operator's evenings — and none of them need a second hire.</p>
+      <div class="crew-grid">
+        <div class="crew-item"><span class="ci">__CI_PHONE__</span><div><b>AI receptionist</b><span>Answers calls and books jobs 24/7 while you're on site.</span></div></div>
+        <div class="crew-item"><span class="ci">__CI_DOC__</span><div><b>Instant quoting</b><span>Photos plus square footage in, a priced estimate out in minutes.</span></div></div>
+        <div class="crew-item"><span class="ci">__CI_LOOP__</span><div><b>Auto follow-up</b><span>Every quote and past customer chased without you remembering.</span></div></div>
+        <div class="crew-item"><span class="ci">__CI_COIN__</span><div><b>AI bookkeeping</b><span>Expenses categorized, invoices raised, what's owed flagged.</span></div></div>
+        <div class="crew-item"><span class="ci">__CI_MEGA__</span><div><b>Local marketing</b><span>Google posts, before/after captions and review replies for local SEO.</span></div></div>
+        <div class="crew-item"><span class="ci">__CI_MAP__</span><div><b>Smart routing</b><span>Jobs sequenced by location to cut windshield time between sites.</span></div></div>
+      </div>
+      <p class="illus-note">Figures are illustrative of a solo insulation contractor and will vary by market. Inside the planner you'll calculate your own.</p>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="section alt" id="how">
+    <div class="sec-head">
+      <span class="eyebrow">Foundation</span>
+      <h2>One Plan, Built In</h2>
+      <p>Nothing here is a standalone calculator. Your profile feeds every stage, so what you get out the other end is a connected strategy — not a stack of disconnected forms.</p>
+    </div>
+    <div class="compare" style="grid-template-columns:1fr 1fr">
+      <article class="ccard">
+        <span class="ic-tile">__ICON_HAND__</span>
+        <div class="kicker">Where most owners start</div>
+        <h3>Scattered Guesswork</h3>
+        <p class="desc">A pile of AI tool tabs, no read on what's worth it, and no idea what to do first. Effort spent everywhere, momentum nowhere.</p>
+      </article>
+      <article class="ccard ai">
+        <span class="ic-tile">__ICON_SPARK__</span>
+        <div class="kicker">Where Groundwork AI takes you</div>
+        <h3>A Sequenced Strategy</h3>
+        <p class="desc">A readiness score that sets your pace, three priorities drawn from your goals, a shortlist of concrete moves, and a phased roadmap with the numbers attached.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== TOOLS ===== -->
+  <section class="section" id="tools">
+    <div class="sec-head">
+      <span class="eyebrow">The toolbox</span>
+      <h2>Real Tools, Not Generic Advice</h2>
+      <p>Groundwork AI maps every move to a best-in-class tool for the job, then assembles your shortlist as you plan — so you leave with names, not homework. Every tool clears four small-shop tests: launch it solo, let it run, cover real ground, and pay off fast.</p>
+    </div>
+    <div class="tool-chips" id="tool-chips"></div>
+    <div style="text-align:center;margin-top:32px">
+      <p style="color:var(--text);margin:0 0 16px">Backed by a browsable catalog of <strong style="color:var(--ink)">62 tools across 10 categories</strong> — each with cost, schedule and performance for small-business integration.</p>
+      <button class="btn ghost" data-enter="catalog">▤ Browse the full catalog</button>
+    </div>
+  </section>
+
+  <!-- ===== STAGES ===== -->
+  <section class="section" id="stages">
+    <div class="sec-head">
+      <span class="eyebrow">The method</span>
+      <h2>Eight Connected Stages</h2>
+    </div>
+    <div class="stages" id="stage-grid"></div>
+    <div style="text-align:center;margin-top:40px">
+      <button class="btn" data-enter="profile">Start with stage one →</button>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <span class="eyebrow">Ready when you are</span>
+    <h2 style="margin-top:16px">Build your plan in one sitting</h2>
+    <p>Free, no account, no jargon. Answer a few questions and walk out with a costed AI roadmap for your business.</p>
+    <button class="btn" data-enter="profile">Build my plan →</button>
+  </div>
+
+  <footer>
+    <span>Groundwork AI™ — AI strategy for small business</span>
+    <span>Illustrative planning tool · not financial advice</span>
+  </footer>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app">
+  <div class="shell">
+    <aside class="rail">
+      <a class="home" id="go-home" href="#">__BACK__ Back to home</a>
+      <div class="brand"><span class="flame">__FLAME__</span><b>Groundwork<span class="ai"> AI</span><span class="tm">™</span></b></div>
+      <nav class="spine" id="spine" aria-label="Strategy stages"></nav>
+      <div class="rail-ref"><button class="step ref" id="rail-catalog"><span class="dot">▤</span><span class="lbl">Tool catalog<small>Browse all tools</small></span></button></div>
+      <div class="foot"><small id="progress-label">0 of 6 stages done</small><div class="bar"><i id="progress-bar"></i></div></div>
+    </aside>
+    <main class="main">
+      <div class="mtab" id="mtab"></div>
+      <div id="canvas"></div>
+    </main>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- inline icons ---------- */
+const FLAME='<svg viewBox="0 0 24 24" fill="none" width="100%" height="100%"><path d="M12 3c1.5 3 4.5 4.2 4.5 8.2A4.5 4.5 0 0 1 12 16a3 3 0 0 1-3-3c0-1.6 1-2.4 1-2.4S8 11 8 9c0-3 4-3 4-6Z" stroke="#E8853A" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 16c2.5 0 4.5 1.6 4.5 3.5S14.5 21 12 21s-4.5-.6-4.5-2.5S9.5 16 12 16Z" fill="#E8853A" opacity=".15"/></svg>';
+const ICONS={
+  hand:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M5 12V8a1.5 1.5 0 0 1 3 0M8 11V6.5a1.5 1.5 0 0 1 3 0V11m0-1V5.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v5a5 5 0 0 1-5 5h-1.5a5 5 0 0 1-4-2l-2.5-3.4a1.5 1.5 0 0 1 2.3-1.9L8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  spark:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M6 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5V21a1 1 0 0 1-1 1A16 16 0 0 1 5 5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M6 3h7l5 5v13H6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 3v5h5M9 13h6M9 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  loop:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M4 9a8 8 0 0 1 14-3M20 6v4h-4M20 15a8 8 0 0 1-14 3M4 18v-4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  coin:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v10M9.5 9.5h3.5a1.8 1.8 0 0 1 0 3.5h-2a1.8 1.8 0 0 0 0 3.5H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  mega:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M4 10v4l9 4V6l-9 4ZM13 7l5-2v14l-5-2M7 14v4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+  map:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 4v14M15 6v14" stroke="currentColor" stroke-width="1.5"/></svg>',
+  back:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none"><path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+/* ---------- App state & data (ported) ---------- */
+const state={view:"profile",profile:{name:"",industry:"",size:"",hourly:35,goals:[]},
+  readiness:{data:0,skills:0,process:0,budget:0,leadership:0},
+  selected:new Set(),tasksDone:new Set(),roi:{hours:null,tool:120,touched:false},coa:null};
+
+const STEPS=[["dashboard","Dashboard","Your snapshot"],["profile","Business profile","Tell us about you"],
+  ["readiness","AI readiness","Score 5 dimensions"],["strategy","Strategy","Your priorities"],
+  ["opportunities","Opportunity map","Pick your moves"],["roadmap","Roadmap","Sequenced plan"],["stack","Tool stack","Best-in-class picks"],["roi","ROI","The numbers"],["coa","Courses of action","Decide & commit"]];
+const INDUSTRIES=["Retail / E-commerce","Professional services","Food & beverage","Health & wellness","Trades / home services","Creative / agency","Manufacturing / maker","Hospitality","Other"];
+const SIZES=["Just me","2–5 people","6–15 people","16–50 people"];
+const GOALS=["Grow revenue","Save time","Cut costs","Better customer experience","Scale the team","Sharper marketing","Smarter decisions"];
+const DIMENSIONS=[
+  ["data","Data & systems","Is your business data organized and reachable — sales, customers, inventory?",["Scattered / on paper","Some spreadsheets","Mostly in software","Centralized tools","Clean & connected"]],
+  ["skills","Team comfort with tech","How comfortable are you and your team adopting new software?",["Resistant","Cautious","Neutral","Eager","Power users"]],
+  ["process","Repeatable processes","Are your day-to-day workflows documented and consistent?",["Ad hoc","A few habits","Some written","Mostly documented","Fully systemized"]],
+  ["budget","Tooling budget","Room in the budget for new tools and a bit of setup time?",["None","Very tight","Modest","Comfortable","Flexible"]],
+  ["leadership","Time & commitment","Can leadership commit time to learning and rolling this out?",["No bandwidth","Rarely","Sometimes","Regularly","Fully behind it"]]];
+const TOOLS={
+  tidio:{name:"Tidio Lyro",fn:"Customer service",strength:"Claude-powered replies plus Lyro Smart Actions for order management.",bestFor:"E-commerce support",fit:{solo:5,auto:4,value:5,stack:4}},
+  botpress:{name:"Botpress",fn:"Customer service",strength:"Visual flow builder, autonomous nodes and multi-channel deployment.",bestFor:"Custom chat agents",fit:{solo:3,auto:4,value:4,stack:4}},
+  relevance:{name:"Relevance AI",fn:"Sales",strength:"A multi-agent SDR workforce that coordinates outreach for you.",bestFor:"Outbound & lead management",fit:{solo:3,auto:5,value:4,stack:3}},
+  hubspot:{name:"HubSpot Breeze",fn:"Sales",strength:"CRM-native AI with Breeze data enrichment and Content Remix.",bestFor:"Sales, marketing & CRM",fit:{solo:4,auto:4,value:4,stack:5}},
+  zapier:{name:"Zapier",fn:"Operations",strength:"9,000+ app integrations, Copilot no-code building and multi-step Zaps.",bestFor:"Connecting & automating apps",fit:{solo:5,auto:3,value:4,stack:5}},
+  notion:{name:"Notion AI",fn:"Internal & team",strength:"Meeting notes, enterprise search and instant database creation.",bestFor:"Knowledge & internal ops",fit:{solo:4,auto:3,value:3,stack:3}},
+  slack:{name:"Slack AI",fn:"Internal & team",strength:"Thread summaries, channel recaps and natural-language search.",bestFor:"Team communication",fit:{solo:5,auto:2,value:3,stack:4}},
+  fireflies:{name:"Fireflies",fn:"Internal & team",strength:"Auto-transcription, the AskFred assistant and CRM logging.",bestFor:"Meeting follow-ups",fit:{solo:4,auto:3,value:3,stack:4}},
+  reclaim:{name:"Reclaim",fn:"Internal & team",strength:"Smart task scheduling, focus-time protection and auto-rescheduling.",bestFor:"Calendar & time blocking",fit:{solo:4,auto:3,value:3,stack:3}},
+  brex:{name:"Brex",fn:"Finance & admin",strength:"AI audit agents, receipt auto-generation and accounting sync.",bestFor:"Spend & expense management",fit:{solo:3,auto:3,value:3,stack:3}}};
+
+const OPPS=[
+  {id:"mk1",fn:"Marketing",title:"Draft social & email content",desc:"Generate first drafts of posts, newsletters and captions in your voice, then edit — instead of a blank page.",impact:"High",effort:"Low",hrs:4,tools:"AI writing assistant + scheduler",stack:["hubspot"]},
+  {id:"mk2",fn:"Marketing",title:"SEO & ad copy variations",desc:"Spin up dozens of headline and ad variations to test, plus keyword-aware page descriptions.",impact:"Med",effort:"Low",hrs:2,tools:"AI assistant, ad-platform AI",stack:["hubspot"]},
+  {id:"mk3",fn:"Marketing",title:"Auto-respond to reviews",desc:"Draft thoughtful, on-brand replies to Google and social reviews so nothing sits unanswered.",impact:"Med",effort:"Low",hrs:1,tools:"Reputation tool with AI",stack:[]},
+  {id:"cs1",fn:"Customer service",title:"FAQ chatbot on your site",desc:"A widget that answers common questions 24/7 from your own info and hands off anything tricky.",impact:"High",effort:"Med",hrs:5,tools:"No-code chatbot builder",stack:["tidio","botpress"]},
+  {id:"cs2",fn:"Customer service",title:"Email triage & draft replies",desc:"Sort the inbox by urgency and pre-write replies to routine messages for you to approve.",impact:"High",effort:"Med",hrs:4,tools:"AI email assistant",stack:[]},
+  {id:"cs3",fn:"Customer service",title:"Build a help knowledge base",desc:"Turn scattered answers into a searchable help center customers and new staff self-serve from.",impact:"Med",effort:"Med",hrs:2,tools:"AI + help-desk software",stack:["notion"]},
+  {id:"sl1",fn:"Sales",title:"Qualify & route leads",desc:"Ask incoming leads a few smart questions, score them and send hot ones straight to you.",impact:"High",effort:"Med",hrs:3,tools:"Chatbot + CRM",stack:["relevance","botpress","hubspot"]},
+  {id:"sl2",fn:"Sales",title:"Generate quotes & proposals",desc:"Produce tailored proposals and quotes from a short brief in minutes instead of an afternoon.",impact:"High",effort:"Low",hrs:3,tools:"AI assistant + templates",stack:["hubspot"]},
+  {id:"sl3",fn:"Sales",title:"Clean up CRM data entry",desc:"Auto-log calls and emails and fill contact records so the pipeline stays accurate without typing.",impact:"Med",effort:"Med",hrs:2,tools:"CRM automation / AI",stack:["hubspot","fireflies","relevance"]},
+  {id:"op1",fn:"Operations",title:"Extract data from documents",desc:"Pull line items from invoices, receipts and forms into a spreadsheet automatically — no rekeying.",impact:"High",effort:"Med",hrs:4,tools:"Document AI / OCR",stack:["zapier","brex"]},
+  {id:"op2",fn:"Operations",title:"Smarter scheduling & routing",desc:"Optimize shifts, appointments or delivery routes against demand and availability.",impact:"Med",effort:"Med",hrs:3,tools:"AI scheduling software",stack:[]},
+  {id:"op3",fn:"Operations",title:"Forecast inventory & demand",desc:"Predict what you'll need and when, so you stop overstocking slow movers and selling out of winners.",impact:"High",effort:"High",hrs:3,tools:"Inventory tool with forecasting",stack:[]},
+  {id:"op4",fn:"Operations",title:"Connect your apps",desc:"Wire your tools together so data flows between them automatically — no copy-paste between systems.",impact:"High",effort:"Med",hrs:3,tools:"Automation platform",stack:["zapier"]},
+  {id:"fn1",fn:"Finance & admin",title:"Auto-categorize bookkeeping",desc:"Sort transactions and flag oddities so the books are near-ready before they reach your accountant.",impact:"Med",effort:"Low",hrs:3,tools:"Accounting software AI",stack:["brex"]},
+  {id:"fn2",fn:"Finance & admin",title:"Summarize the numbers",desc:"Turn raw reports into a plain-language read on cash flow, margins and what changed this month.",impact:"Med",effort:"Low",hrs:2,tools:"AI assistant + your reports",stack:[]},
+  {id:"it1",fn:"Internal & team",title:"Meeting notes & follow-ups",desc:"Auto-transcribe calls, pull out the action items and log the follow-ups to your CRM.",impact:"Med",effort:"Low",hrs:2,tools:"Meeting AI",stack:["fireflies","notion"]},
+  {id:"it2",fn:"Internal & team",title:"Team knowledge & search",desc:"Summarize long threads and search everything your team knows in plain language.",impact:"Med",effort:"Low",hrs:2,tools:"Workspace AI",stack:["notion","slack"]},
+  {id:"it3",fn:"Internal & team",title:"Protect focus & auto-schedule",desc:"Auto-block focus time, defend it and reschedule around conflicts so deep work survives the week.",impact:"Med",effort:"Low",hrs:2,tools:"Smart calendar",stack:["reclaim"]},
+  {id:"pr1",fn:"Product & service",title:"Personalized recommendations",desc:"Suggest the right next product or service to each customer based on what they've bought before.",impact:"High",effort:"High",hrs:2,tools:"Recommendation engine",stack:[]},
+  {id:"pr2",fn:"Product & service",title:"Spot trends in feedback",desc:"Read across reviews, surveys and messages to surface what customers keep asking for.",impact:"Med",effort:"Med",hrs:2,tools:"AI analysis assistant",stack:[]}];
+const FUNCTIONS=["All","Marketing","Customer service","Sales","Operations","Finance & admin","Internal & team","Product & service"];
+let oppFilter="All";
+const TIERS=[{min:0,name:"Exploring",note:"Start with low-effort, low-risk wins and tidy up your data as you go."},
+  {min:40,name:"Building",note:"You're ready for a couple of real workflows. Focus beats breadth here."},
+  {min:65,name:"Ready",note:"Solid footing. You can take on a flagship project alongside quick wins."},
+  {min:85,name:"Advanced",note:"Strong base — pursue higher-effort, higher-payoff automation with confidence."}];
+
+// Full tool catalog [category, name, best-for, cost, model, schedule, performance, smb note] — pricing approx, mid-2026, verify
+const CAT_CATS=["All","General assistants","Customer support","Voice / receptionist","Sales & outbound","Marketing & content","Automation & builders","Meetings & notes","Scheduling & time","Knowledge & comms","Finance & spend"];
+let catFilter="All";
+const CATALOG=[
+["General assistants","ChatGPT (OpenAI)","Everyday drafting, analysis, images, research","Free; Plus $20/mo; Pro $200/mo","Flat / per-seat","Minutes","Broadest generalist; newest models, custom GPTs, image gen — drafts you steer","The default first assistant for most owners"],
+["General assistants","Claude (Anthropic)","Long-document writing, analysis, coding","Free; Pro $20/mo; Max $100-200/mo","Flat / per-seat","Minutes","Large context, strong reasoning and long-text handling","Good where nuance and long documents matter"],
+["General assistants","Google Gemini","Google Workspace users; Docs & Gmail","Free; AI Pro ~$20/mo; Business ~$20/user","Flat / add-on","Minutes","Strong inside Google apps; research, Live, Canvas","Best if you live in Google Workspace"],
+["General assistants","Microsoft Copilot","Office & Teams users","~$30/user/mo + M365; free in Windows/Edge","Per-seat add-on","Minutes","Embedded in Word/Excel/PowerPoint/Outlook/Teams","Pricey unless already on Microsoft 365"],
+["General assistants","Perplexity","Research with citations","Free; Pro $20/mo","Flat","Minutes","Answer engine that cites its sources","Useful research companion"],
+["Customer support","Tidio (Lyro)","E-commerce support + order actions","~$68+/mo typical; free 50 convos","Subscription + AI add-on","Minutes-hours","~55-65% auto-resolution; Smart Actions on orders","Best ROI-to-effort for small e-com / service"],
+["Customer support","Intercom Fin","Conversational support (on Intercom)","$0.99/resolution + seats $29-132","Per-resolution + seat","Hours","50%+ autonomous resolution; clean human handoff","Costs climb fast at high ticket volume"],
+["Customer support","Chatbase","Docs-trained chatbot, fast standup","~$19-40/mo","Credit-based","~5-30 min","Custom GPT on your docs; weak native escalation","Cheapest fast path under ~500 tickets/mo"],
+["Customer support","Zendesk Advanced AI","Teams already on Zendesk","~$1.50/resolution or ~$50/agent","Per-resolution / add-on","Days","Solid resolution if locked into Zendesk","Overkill for very small teams"],
+["Customer support","Gorgias","Shopify support","From ~$10-50+/mo","Subscription","Days","Shopify-native ticket automation","Good for small Shopify stores"],
+["Customer support","Freshdesk (Freddy)","Helpdesk with AI assist","Free <=2 agents; paid tiers","Per-agent","Days","Suggests replies and tags; work returns to a human","Fine as helpdesk, weaker as a true agent"],
+["Customer support","Crisp","All-in-one live chat + AI","~$95/mo unlimited","Flat workspace","Hours","Live chat plus AI on flat pricing","Predictable budgeting"],
+["Customer support","Botpress","Custom multi-channel chat agents","Free tier + usage / AI spend","Usage / credit","Days-weeks","Visual builder, autonomous nodes, self-host","For technical or highly custom needs"],
+["Customer support","Decagon / Sierra / Ada","High-volume or voice support","Enterprise ($95K-150K+/yr)","Custom","Weeks","High autonomy at scale","Usually beyond a small-business budget"],
+["Voice / receptionist","Rosie","Home-services missed-call capture","$49/mo (250 min)","Subscription + overage","~10 min","Answers & books 24/7; built for trades","Strong fit for solo trades (e.g. insulation)"],
+["Voice / receptionist","Goodcall","Configurable call flows, repeat callers","$59-79/mo (per unique caller)","Per unique caller","~10 min","Lead capture, booking, Zapier; home services","Predictable when customers call repeatedly"],
+["Voice / receptionist","AIRA","Budget bilingual answering","$24.95/mo (30 calls)","Per-call subscription","<15 min","24/7 booking, CRM, EN/ES","Cheapest credible entry point"],
+["Voice / receptionist","Dialzara","Very low-volume answering","$29/mo (60 min)","Subscription","~15 min","Basic AI call answering","Solo / low call volume"],
+["Voice / receptionist","My AI Front Desk","Appointment-heavy businesses","$65-79/mo","Subscription","Hours","Receptionist built around scheduling","Good for booking-driven shops"],
+["Voice / receptionist","Smith.ai","AI + human hybrid (pro services)","$95/mo AI; ~$292/mo hybrid","Per-call / hybrid","Days","Human backup on complex calls; CRM integ.","For law firms / agencies needing humans"],
+["Voice / receptionist","Ruby","Live human receptionists","$235-319/mo","Per-minute plans","Days","Live humans (benchmark, not AI)","Premium; a non-AI comparison"],
+["Voice / receptionist","AgentZap","Many integrations + bilingual","~$109/mo","Subscription","Hours","238+ integrations, bilingual","Mid-range option"],
+["Sales & outbound","Apollo.io","Prospecting database + sequences","Free; $49-119/user/mo + credits","Per-seat + credits","Days","275M+ contacts, sequences; AI drafts you approve","Watch credit overages on heavy use"],
+["Sales & outbound","Relevance AI","Modular AI SDR workforce","From ~$29/mo","Subscription / credits","Days","Multi-agent coordination; lead qualification","Good entry to an 'AI workforce'"],
+["Sales & outbound","Clay","Lead enrichment / list building","~$149+/mo","Credit-based","Days-weeks","Powerful enrichment; steep learning curve","Many SMBs spend more learning than using it"],
+["Sales & outbound","Artisan (Ava)","Autonomous AI SDR","Seat / contact based (demo)","Per-seat","Days","Prospects, sequences and books with little input","True autonomy vs. a co-pilot"],
+["Sales & outbound","11x / AiSDR / Salesforge","Autonomous outbound variants","Varies by seat","Subscription","Days","Autonomous SDR alternatives","Compare against Apollo + Artisan"],
+["Sales & outbound","HubSpot (Breeze)","Sales, marketing & CRM AI","Free CRM; hubs ~$15-20/seat + Breeze","Per-seat","Days","CRM-native AI, enrichment, Content Remix","Best if you already run on HubSpot"],
+["Sales & outbound","Warmly","Full go-to-market agent suite","From ~$833/mo","Subscription","Days-weeks","Connects outbound, email and ads","Mid-market budget"],
+["Marketing & content","Jasper","Marketing copy with brand voice","~$39-49/mo","Per-seat","Minutes","Marketing templates; ~85% brand-tone match","Marketer-friendly vs. a generalist"],
+["Marketing & content","Copy.ai","GTM content & workflows","~$36-49/mo","Subscription","Minutes","Content plus workflow automation","Content teams running campaigns"],
+["Marketing & content","Canva (Magic Studio)","Design for non-designers","Pro ~$15/mo","Per-seat","Minutes","On-brand graphics, decks, video; brand kit","Covers 80-90% of non-designer needs"],
+["Marketing & content","Gumloop","No-code marketing agents","$37/mo","Credit-based","Hours","SEO, scraping, content ops; nested subflows","For teams outgrowing Zapier on marketing"],
+["Marketing & content","Gamma","AI slide decks & sites","Free; ~$10-20/mo","Subscription","Minutes","Fast decks and one-page sites","Pitch and marketing decks"],
+["Automation & builders","Zapier (+ Agents)","Connect apps; the backbone","Free; ~$20-30/mo; Team ~$103/mo","Task-based","Minutes","7,000+ apps; reliable plumbing; lower autonomy","Easiest connective tissue for a small stack"],
+["Automation & builders","Make","Visual flows, cheaper at volume","From ~$9-11/mo","Operations-based","Hours","Powerful flows; steeper than Zapier","Budget automation as workflows grow"],
+["Automation & builders","n8n","Self-hosted, developer control","Free self-host; ~$24/mo cloud","Self-host / subscription","Days","Open-source; bring your own API keys","For technical teams wanting control"],
+["Automation & builders","Lindy","'AI employee', NL workflows","$49.99/mo","Subscription","Hours","4,000+ integrations; describe agents in words","Non-technical agent building"],
+["Automation & builders","Relay.app","Human-in-the-loop workflows","$27/mo","Subscription","Hours","Approval steps built into automations","Where oversight matters"],
+["Automation & builders","Pipedream","No-code plus code","$45/mo","Credit-based","Days","Flexible for semi-technical builders","Developers who still want speed"],
+["Automation & builders","Power Automate","Microsoft ecosystem automation","$15/user/mo","Per-seat","Hours","Office and Teams automation","If you are already on Microsoft"],
+["Automation & builders","CrewAI / AutoGen","Custom multi-agent systems","Free + developer time / infra","Open-source","Weeks","Code-built multi-agent orchestration","Needs developers; skip if you have none"],
+["Meetings & notes","Fireflies","Transcribe + CRM logging","Free; $10-39/user/mo","Per-seat + AI credits","Minutes","Transcripts, AskFred, CRM autofill","Sales and ops follow-ups"],
+["Meetings & notes","Otter","Real-time transcription","Free; Pro $16.99/mo; Business $30/user","Per-seat","Minutes","Live transcript and collaboration","Internal meetings"],
+["Meetings & notes","Granola","No-bot private notes (Mac)","Free; from ~$14-18/mo","Per-seat","Minutes","Human-in-loop notes; no bot announces itself","Client calls where a bot feels intrusive"],
+["Meetings & notes","Fathom","Free summaries & highlights","Generous free tier; paid tiers","Per-seat","Minutes","Crisp summaries and shareable clips","Best free tier"],
+["Meetings & notes","tl;dv / Grain / Avoma","CRM-connected meeting intelligence","From ~$0-30/user","Per-seat","Minutes","Variants tuned for sales / CS coaching","Pick by CRM fit"],
+["Scheduling & time","Reclaim","Auto focus time + tasks","Free; paid ~$8-10/user/mo","Per-seat","Minutes","Schedules tasks, protects focus, reschedules","Calendar defense for busy owners"],
+["Scheduling & time","Motion","AI calendar + task/project planner","~$29-49/mo","Per-seat","Hours","Auto-plans tasks around your meetings","All-in-one planner"],
+["Scheduling & time","Clockwise","Team focus-time optimization","Free; paid ~$7-11/user","Per-seat","Minutes","Optimizes team meeting times","Teams with heavy meeting loads"],
+["Scheduling & time","Calendly (AI)","Booking links + routing","Free; ~$10-16/user","Per-seat","Minutes","Scheduling automation and routing","Client booking"],
+["Knowledge & comms","Notion AI","Notes, search, databases","Free; AI from ~$10/mo","Per-seat add-on","Minutes","Meeting notes, enterprise search, DB creation","Internal knowledge hub"],
+["Knowledge & comms","Slack AI","Thread summaries + search","Add-on ~$10/user/mo on paid Slack","Per-seat add-on","Minutes","Recaps and NL search across messages","If your team lives in Slack"],
+["Knowledge & comms","Guru / Mem / Glean","Knowledge & enterprise search","From ~$0-15/user; Glean enterprise","Per-seat","Days","Surfaces company knowledge on demand","Glean is enterprise-priced"],
+["Finance & spend","Ramp","Cards + expense + AP automation","Free (with card use)","Free + interchange","Days","Receipt OCR, policy controls, accounting sync","Free, but a corporate-card / team product"],
+["Finance & spend","Brex","Cards + spend + AI audit","Premium $12/user/mo","Per-seat + card","Days","AI receipt match (~85%), audit agents, sync","Being acquired by Capital One; team-oriented"],
+["Finance & spend","QuickBooks (Intuit Assist)","Books for Intuit users","~$30-90/mo + AI","Subscription","Days","Categorization, NL queries, cash-flow projections","Familiar; AI layered onto your books"],
+["Finance & spend","Digits","'Self-driving' bookkeeping","Subscription (varies)","Subscription","Days","Auto-books most activity; AI invoicing & bill pay","Replaces some accountant work"],
+["Finance & spend","Puzzle","AI-native accounting (startups)","Tiered (varies)","Subscription","Days","~98% auto-categorization, real-time runway","Startup-focused"],
+["Finance & spend","Wave","Free invoicing & expense","Free (add-ons paid)","Free + add-ons","Hours","Basic books for solo owners","Budget solo option"],
+["Finance & spend","Expensify / Zoho Expense","Expense capture","From ~$0-9/user","Per-seat","Hours","Receipt scan and categorization","Expense-only"],
+["Finance & spend","Quicken Business & Personal","Solo expense + tax","$4.99/mo","Subscription","Hours","Schedule C categories, mileage tracking","Sole proprietors"]];
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+const sumSelected=k=>OPPS.filter(o=>state.selected.has(o.id)).reduce((a,o)=>a+o[k],0);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function readinessScore(){const r=state.readiness,v=[r.data,r.skills,r.process,r.budget,r.leadership];if(v.some(x=>x===0))return null;return Math.round(v.reduce((a,b)=>a+b,0)/25*100);}
+function tierFor(s){let t=TIERS[0];for(const x of TIERS)if(s>=x.min)t=x;return t;}
+function completion(){return{dashboard:false,profile:!!(state.profile.name&&state.profile.industry&&state.profile.goals.length),
+  readiness:readinessScore()!==null,strategy:readinessScore()!==null&&state.profile.goals.length>0,
+  opportunities:state.selected.size>0,stack:state.selected.size>0,roadmap:state.tasksDone.size>0,roi:state.selected.size>0,coa:!!state.coa};}
+
+/* ---------- screens ---------- */
+function enterApp(view){state.view=view||"profile";$("#landing").style.display="none";$("#app").classList.add("on");window.scrollTo(0,0);render();}
+function goHome(){$("#app").classList.remove("on");$("#landing").style.display="block";window.scrollTo(0,0);}
+
+/* ---------- app nav ---------- */
+function renderNav(){
+  const done=completion();const spine=$("#spine"),mtab=$("#mtab");spine.innerHTML="";mtab.innerHTML="";
+  const mh=document.createElement("button");mh.className="mtab-home";mh.innerHTML="← Home";mh.onclick=()=>goHome();mtab.appendChild(mh);
+  STEPS.forEach(([id,label,sub],i)=>{
+    const cls=(state.view===id?"active ":"")+(done[id]?"done":"");
+    const b=document.createElement("button");b.className="step "+cls;
+    b.innerHTML='<span class="dot"><span>'+i+'</span></span><span class="lbl">'+label+'<small>'+sub+'</small></span>';
+    b.onclick=()=>go(id);spine.appendChild(b);
+    const m=document.createElement("button");m.className=(state.view===id?"active ":"")+(done[id]?"done":"");
+    m.textContent=label;m.onclick=()=>go(id);mtab.appendChild(m);
+  });
+  const dc=Object.entries(done).filter(([k,v])=>k!=="dashboard"&&v).length;const tot=STEPS.length-1;
+  $("#progress-label").textContent=dc+" of "+tot+" stages done";$("#progress-bar").style.width=(dc/tot*100)+"%";
+  const rc=$("#rail-catalog");if(rc){rc.className="step ref"+(state.view==="catalog"?" active":"");rc.onclick=()=>go("catalog");}
+  const mc=document.createElement("button");mc.className="mtab-ref"+(state.view==="catalog"?" active":"");mc.textContent="▤ Catalog";mc.onclick=()=>go("catalog");mtab.appendChild(mc);
+}
+function go(id){state.view=id;render();window.scrollTo({top:0,behavior:"smooth"});}
+
+/* ---------- views (ported, restyled) ---------- */
+function viewProfile(){const p=state.profile;return `
+  <div class="view-head"><div class="eyebrow">Stage 01 — Foundation</div><h2>Tell us about your business</h2>
+  <p>Everything else is built from these answers — your readiness score, the opportunities we surface, your roadmap and the ROI math all read from here.</p></div>
+  <div class="card"><div class="grid g2">
+    <div>
+      <label class="field"><span>Business name</span><input type="text" id="f-name" value="${esc(p.name)}" placeholder="e.g. Northline Insulation"></label>
+      <label class="field"><span>Industry</span><select id="f-ind">${["",...INDUSTRIES].map(x=>`<option ${p.industry===x?"selected":""} value="${esc(x)}">${x||"Choose one…"}</option>`).join("")}</select></label>
+    </div>
+    <div>
+      <label class="field"><span>Team size</span><select id="f-size">${["",...SIZES].map(x=>`<option ${p.size===x?"selected":""} value="${esc(x)}">${x||"Choose one…"}</option>`).join("")}</select></label>
+      <label class="field"><span>Average loaded hourly cost <em>— used for ROI</em></span><input type="number" id="f-hr" min="0" value="${p.hourly}"><div class="hint">Roughly what an hour of your time costs, including overhead.</div></label>
+    </div></div>
+    <div style="margin-top:6px"><span style="display:block;font-size:13px;font-weight:600;margin-bottom:9px;color:var(--ink)">What are you trying to do this year? <em style="color:var(--muted);font-weight:400">Pick all that apply</em></span>
+      <div class="chips" id="f-goals">${GOALS.map(g=>`<button class="chip" aria-pressed="${p.goals.includes(g)}" data-g="${esc(g)}">${g}</button>`).join("")}</div></div>
+  </div>
+  <div class="nav-actions"><span></span><button class="pbtn" onclick="go('readiness')">Score my readiness →</button></div>`;}
+
+function viewReadiness(){const r=state.readiness,score=readinessScore();return `
+  <div class="view-head"><div class="eyebrow">Stage 02 — Diagnosis</div><h2>How ready are you for AI?</h2>
+  <p>Rate five things honestly. No wrong answers — this just sets the pace, so we recommend moves you can actually pull off now.</p></div>
+  <div class="card">${DIMENSIONS.map(([key,title,desc,labels])=>`<div class="dim"><h4>${title}</h4><p>${desc}</p>
+    <div class="levels" data-dim="${key}">${labels.map((l,i)=>`<button aria-pressed="${r[key]===i+1}" data-v="${i+1}"><span class="n">${i+1}</span>${l}</button>`).join("")}</div></div>`).join("")}</div>
+  <div class="card" style="margin-top:18px">${score===null?'<div class="empty">Answer all five to reveal your readiness score.</div>':
+    `<div class="gauge">${dial(score)}<div style="flex:1;min-width:220px"><span class="tier">${tierFor(score).name}</span><p style="margin:12px 0 0;color:var(--text)">${tierFor(score).note}</p></div></div>`}</div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('profile')">← Profile</button><button class="pbtn" onclick="go('strategy')" ${score===null?"disabled style=opacity:.45;cursor:not-allowed":""}>See my strategy →</button></div>`;}
+
+function dial(score){const R=70,C=2*Math.PI*R,off=C*(1-score/100);
+  const col=score>=85?"#F4A35C":score>=65?"#E8853A":score>=40?"#D9763A":"#B14A2A";
+  return `<div class="dial"><svg width="170" height="170" viewBox="0 0 170 170">
+    <circle cx="85" cy="85" r="${R}" fill="none" stroke="#2A201A" stroke-width="14"/>
+    <circle cx="85" cy="85" r="${R}" fill="none" stroke="${col}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${off}"/></svg>
+    <div class="read"><b>${score}</b><small>readiness</small></div></div>`;}
+
+function viewStrategy(){const score=readinessScore();if(score===null)return notReady("readiness","Score your AI readiness first","Your strategy is shaped by both your goals and your readiness tier.");
+  const tier=tierFor(score),goals=state.profile.goals.length?state.profile.goals:["Save time"],pr=buildStrategy(goals,score);return `
+  <div class="view-head"><div class="eyebrow">Stage 03 — Direction</div><h2>Your AI strategy</h2>
+  <p>Three priorities, drawn from your goals${state.profile.industry?` in ${state.profile.industry.toLowerCase()}`:""} and a <strong>${tier.name.toLowerCase()}</strong> readiness score of ${score}. Use this as the lens for choosing opportunities next.</p></div>
+  <div class="card"><div class="callout"><span>◆</span><div>${tier.note} ${score<65?"We've weighted your plan toward fast, low-risk wins that build momentum.":"You've earned room for one ambitious project alongside the easy wins."}</div></div>
+    <ol class="priolist" style="margin:18px 0 0;padding-left:20px">${pr.map(p=>`<li><b>${p.h}.</b> ${p.d}</li>`).join("")}</ol></div>
+  <div class="card"><h3 style="font-size:18px;margin-bottom:6px;font-family:Inter;color:var(--ink)">Guardrails for a small team</h3>
+    <ol class="priolist" style="margin:10px 0 0;padding-left:20px;color:var(--text)">
+      <li>Keep a human approving anything customer-facing until you trust the output.</li>
+      <li>Never paste customer or financial data into tools you haven't checked for privacy terms.</li>
+      <li>Pick one workflow, prove it for two weeks, then expand — don't boil the ocean.</li></ol></div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('readiness')">← Readiness</button><button class="pbtn" onclick="go('opportunities')">Map opportunities →</button></div>`;}
+
+function buildStrategy(goals,score){const map={
+  "Grow revenue":{h:"Put effort where it earns",d:"Aim AI at the top of your funnel and your follow-up — content, lead qualification and quote turnaround — so more of the interest you already get converts."},
+  "Save time":{h:"Automate the repetitive middle",d:"Target the tasks you do over and over: inbox replies, data entry, document handling. Reclaimed hours fund everything else."},
+  "Cut costs":{h:"Reduce manual handling",d:"Use document and bookkeeping automation to shrink hours spent rekeying and reconciling, and to catch errors before they cost you."},
+  "Better customer experience":{h:"Answer faster, everywhere",d:"Stand up a FAQ assistant and email triage so customers get quick, consistent answers without burning out your team."},
+  "Scale the team":{h:"Systemize before you hire",d:"Document and assist your core workflows so a smaller team handles more — and new hires ramp on a knowledge base, not tribal knowledge."},
+  "Sharper marketing":{h:"Test more, cheaper",d:"Generate and A/B test content and ad variations at volume, then double down on what the data says works."},
+  "Smarter decisions":{h:"Turn data into plain answers",d:"Summarize your numbers and customer feedback into clear monthly reads so you act on signal, not gut."}};
+  const picks=goals.slice(0,3).map(g=>map[g]).filter(Boolean);
+  while(picks.length<3){const fb=map["Save time"];if(!picks.includes(fb))picks.push(fb);else picks.push(map["Better customer experience"]);}
+  return picks.slice(0,3);}
+
+function viewOpportunities(){const list=OPPS.filter(o=>oppFilter==="All"||o.fn===oppFilter);return `
+  <div class="view-head"><div class="eyebrow">Stage 04 — Selection</div><h2>AI opportunity map</h2>
+  <p>Concrete use cases sized for a small business. Add the ones that fit your strategy — each flows straight into your roadmap and ROI. <strong>${state.selected.size} in your plan.</strong></p></div>
+  <div class="filters">${FUNCTIONS.map(f=>`<button class="chip" aria-pressed="${oppFilter===f}" data-fn="${esc(f)}">${f}</button>`).join("")}</div>
+  <div class="grid g3">${list.map(o=>{const inP=state.selected.has(o.id);return `<div class="opp ${inP?"in":""}">
+    <div class="fn">${o.fn}</div><h4>${o.title}</h4><p>${o.desc}</p>
+    <div class="meta"><span class="tag impact-${o.impact}">${o.impact} impact</span><span class="tag effort">${o.effort} effort</span><span class="tag hrs">~${o.hrs}h/wk</span></div>
+    <div class="hint" style="margin:0">${o.stack&&o.stack.length?"Recommended: "+o.stack.map(t=>TOOLS[t].name).join(", "):"Tools: "+o.tools}</div>
+    <button class="addbtn" data-add="${o.id}">${inP?"✓ In your plan":"+ Add to plan"}</button></div>`;}).join("")}</div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('strategy')">← Strategy</button><button class="pbtn" onclick="go('roadmap')">Build my roadmap →</button></div>`;}
+
+function viewRoadmap(){const chosen=OPPS.filter(o=>state.selected.has(o.id));
+  if(!chosen.length)return notReady("opportunities","Pick a few opportunities first","Your roadmap sequences whatever you add to your plan by effort.");
+  const score=readinessScore();
+  const phases=[{key:"quick",h:"Quick wins",when:"0–30 days",items:chosen.filter(o=>o.effort==="Low")},
+    {key:"found",h:"Foundations",when:"1–3 months",items:chosen.filter(o=>o.effort==="Med")},
+    {key:"scale",h:"Scale",when:"3–6 months",items:chosen.filter(o=>o.effort==="High")}];
+  const gaps=[];if(score!==null){const r=state.readiness;
+    if(r.data<=2)gaps.push({id:"gap-data",title:"Centralize your business data",sub:"Get sales, customers and inventory out of paper and scattered sheets into a tool the AI can reach."});
+    if(r.process<=2)gaps.push({id:"gap-proc",title:"Document your top 3 workflows",sub:"Write down how you actually do recurring tasks — this is what you'll automate."});
+    if(r.skills<=2)gaps.push({id:"gap-skill",title:"Run a 1-hour team AI session",sub:"Demystify the tools together so adoption doesn't stall on day two."});}
+  return `<div class="view-head"><div class="eyebrow">Stage 05 — Sequence</div><h2>Your AI roadmap</h2>
+  <p>Sequenced by effort so you bank momentum early. Check items off as you go — progress shows on the dashboard.</p></div>
+  <div class="card">${phases.map(ph=>{let items=ph.items.map(o=>({id:o.id,title:o.title,sub:`${o.fn} · ${o.impact} impact · saves ~${o.hrs}h/wk · ${o.tools}`}));
+    if(ph.key==="found")items=[...gaps,...items];if(!items.length)return "";
+    return `<div class="phase"><div class="phase-h"><h3>${ph.h}</h3><span class="when">${ph.when}</span></div>
+      ${items.map(it=>{const d=state.tasksDone.has(it.id);return `<label class="task ${d?"checked":""}"><input type="checkbox" data-task="${it.id}" ${d?"checked":""}><span class="body"><strong>${it.title}</strong><span>${it.sub}</span></span></label>`;}).join("")}</div>`;}).join("")||'<div class="empty">Add opportunities of varying effort to fill out your phases.</div>'}</div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('opportunities')">← Opportunities</button><button class="pbtn" onclick="go('stack')">Pick your tools →</button></div>`;}
+
+function fitMeter(f){if(!f)return"";const rows=[["Launch it solo",f.solo],["Runs unattended",f.auto],["Earns its keep",f.value],["Fits your stack",f.stack]];
+  return `<div class="fit">${rows.map(([l,v])=>`<div class="fit-row"><span class="fit-l">${l}</span><span class="fit-d">${[1,2,3,4,5].map(i=>`<i class="${i<=v?"on":""}"></i>`).join("")}</span></div>`).join("")}</div>`;}
+
+function viewStack(){const chosen=OPPS.filter(o=>state.selected.has(o.id));
+  if(!chosen.length)return notReady("opportunities","Pick your moves first","Your stack is the named, best-in-class tools behind the opportunities you choose.");
+  const used={};chosen.forEach(o=>(o.stack||[]).forEach(t=>{(used[t]=used[t]||[]).push(o.title);}));
+  const ids=Object.keys(used).sort((a,b)=>used[b].length-used[a].length);
+  const general=chosen.filter(o=>!(o.stack&&o.stack.length));
+  return `<div class="view-head"><div class="eyebrow">Stage 06 — The toolbox</div><h2>Your AI stack</h2>
+    <p>The specific, best-in-class tools behind the moves you picked — de-duplicated, so one tool can cover several jobs. These are starting points, not endorsements; always check current pricing and privacy terms before you commit.</p></div>
+    <div class="card" style="margin-bottom:18px"><h3 style="font-size:18px;font-family:Inter;color:var(--ink);margin-bottom:6px">How a tool earns its spot</h3>
+      <p style="color:var(--text);font-size:13.5px;margin:0 0 14px">Each pick is weighed on four small-shop tests, then scored 1–5 on every card below so the trade-offs are visible at a glance.</p>
+      <div class="grid g2" style="gap:12px">
+        <div class="vet"><b>Launch it solo</b><span>Goes live without code, logic trees or a sales call — a non-technical owner can run it.</span></div>
+        <div class="vet"><b>Let it run</b><span>Carries the task itself rather than handing every draft back to you to finish.</span></div>
+        <div class="vet"><b>Cover real ground</b><span>Handles more than one job, so you buy and wire together fewer separate apps.</span></div>
+        <div class="vet"><b>Fit &amp; pay off fast</b><span>Plugs into the tools you already live in and shows a result in days, not a quarter.</span></div>
+      </div>
+      <div class="callout" style="margin-top:14px"><span>◆</span><div><strong>Where to start:</strong> for most small businesses, customer support is the highest-return first move — the volume is steady, slow replies cost you on the spot, and a support agent can prove itself inside the first week.</div></div>
+      <div style="margin-top:14px"><button class="addbtn" onclick="go('catalog')">▤ Browse the full tool catalog (62 across 10 categories) →</button></div></div>
+    ${ids.length?`<div class="grid g3">${ids.map(id=>{const t=TOOLS[id],n=used[id].length;
+      return `<div class="opp in"><div class="fn">${t.fn}</div><h4>${t.name}</h4><p>${t.strength}</p>
+        <div class="meta"><span class="tag effort">${t.bestFor}</span><span class="tag hrs">Powers ${n} move${n>1?"s":""}</span></div>
+        <div class="hint" style="margin:0">For: ${used[id].join(" · ")}</div>${fitMeter(t.fit)}</div>`;}).join("")}</div>`
+      :`<div class="card"><div class="empty">The moves you picked run on general-purpose AI assistants — no specialist tool needed yet.</div></div>`}
+    ${general.length?`<div class="card" style="margin-top:18px"><div class="callout"><span>◆</span><div><strong>Plus a general assistant.</strong> These moves lean on a general-purpose AI assistant rather than a specialist tool: ${general.map(o=>o.title).join(", ")}.</div></div></div>`:""}
+    ${!ids.includes("zapier")?`<div class="card"><div class="callout"><span>◆</span><div><strong>Connect it all.</strong> Most small stacks share a backbone — a tool like Zapier wires these apps together so data flows without copy-paste, and your saved hours compound. Add "Connect your apps" on the opportunity map to build it in.</div></div></div>`:""}
+    <p class="illus-note" style="text-align:left;margin-top:18px">A note on fit: plenty of capable tools still aren't built for a one-person shop — enterprise-priced support suites, builders that become a job in themselves, and single-channel bots tend to add cost or complexity faster than they save it. Groundwork AI leans toward tools a small team can actually run alone.</p>
+    <div class="nav-actions"><button class="pbtn ghost" onclick="go('roadmap')">← Roadmap</button><button class="pbtn" onclick="go('roi')">Run the numbers →</button></div>`;}
+
+function viewROI(){const r=state.roi,p=state.profile;
+  const hours=r.touched&&r.hours!==null?r.hours:sumSelected("hrs");const hourly=Number(p.hourly)||0;
+  const weekly=hours*hourly,monthlyGross=weekly*4.33,monthlyNet=monthlyGross-(Number(r.tool)||0),annual=monthlyNet*12;
+  const payback=monthlyNet>0?(Number(r.tool)||0)/monthlyNet:null;
+  return `<div class="view-head"><div class="eyebrow">Stage 07 — The case</div><h2>What it's worth</h2>
+  <p>A back-of-envelope read using the time your selected opportunities give back, valued at your hourly cost. Adjust anything that doesn't match your reality.</p></div>
+  <div class="card"><div class="grid g3">
+    <label class="field"><span>Hours saved per week <em>— from your plan</em></span><input type="number" id="roi-hours" min="0" value="${hours}"><div class="hint">${state.selected.size} opportunities selected.</div></label>
+    <label class="field"><span>Your hourly cost</span><input type="number" id="roi-hourly" min="0" value="${hourly}"><div class="hint">Edit on the profile to change everywhere.</div></label>
+    <label class="field"><span>Monthly tool spend</span><input type="number" id="roi-tool" min="0" value="${r.tool}"><div class="hint">Estimated subscriptions for these tools.</div></label></div>
+    <div class="roi-out">
+      <div class="pstat"><small>Time reclaimed</small><b>${hours} hrs<span class="u">/wk</span></b><div class="sub">${Math.round(hours*4.33)} hours a month back</div></div>
+      <div class="pstat good"><small>Net monthly value</small><b>${money(monthlyNet)}</b><div class="sub">${money(monthlyGross)} saved − ${money(r.tool)} tools</div></div>
+      <div class="pstat good"><small>Annual value</small><b>${money(annual)}</b><div class="sub">${payback!==null?"Tools pay for themselves fast":"Increase saved hours to turn positive"}</div></div></div>
+    ${monthlyNet<=0?'<div class="callout warn" style="margin-top:16px"><span>!</span><div>At these numbers the tools cost more than they save. Add a couple of higher-impact opportunities, or trim tool spend, until the net turns positive.</div></div>':""}</div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('stack')">← Tool stack</button><button class="pbtn" onclick="go('coa')">Weigh my options →</button></div>`;}
+
+function buildCOAs(){
+  const chosen=OPPS.filter(o=>state.selected.has(o.id));
+  const hourly=Number(state.profile.hourly)||0;
+  const SETUP={Low:4,Med:14,High:32};
+  const totalHrs=chosen.reduce((a,o)=>a+o.hrs,0);
+  function calc(moves,sched){
+    const hrs=moves.reduce((a,o)=>a+o.hrs,0);
+    const setupH=moves.reduce((a,o)=>a+SETUP[o.effort],0);
+    const setupCost=setupH*hourly;
+    const tools=new Set();moves.forEach(o=>(o.stack||[]).forEach(t=>tools.add(t)));
+    const monthly=moves.length?20+tools.size*45:0;
+    const annual=Math.max(0,(hrs*hourly*4.33-monthly)*12);
+    const deferred=chosen.filter(o=>moves.indexOf(o)<0);
+    const defHrs=deferred.reduce((a,o)=>a+o.hrs,0);
+    const defAnnual=defHrs*hourly*4.33*12;
+    const pct=totalHrs?Math.round(hrs/totalHrs*100):0;
+    return{moves,hrs,setupH,setupCost,monthly,annual,deferred,defAnnual,pct,sched};
+  }
+  return{
+    A:calc(chosen.filter(o=>o.effort==="Low"),"2–4 weeks"),
+    B:calc(chosen.filter(o=>o.effort!=="High"),"1–3 months"),
+    C:calc(chosen.slice(),"3–6 months"),
+    totalHrs,fullAnnualGross:totalHrs*hourly*4.33*12};
+}
+
+function viewCOA(){
+  const chosen=OPPS.filter(o=>state.selected.has(o.id));
+  if(!chosen.length)return notReady("opportunities","Pick your moves first","Courses of action compare different ways to phase the moves you choose.");
+  const c=buildCOAs(),score=readinessScore();
+  const rec=score==null?"B":score<40?"A":score<70?"B":"C";
+  const meta={
+    A:{name:"Quick Wins",tag:"Crawl",sum:"Only the low-effort moves — value flowing in weeks for very little spend.",trade:"Lowest risk and cost, but your bigger wins stay parked until you come back for them."},
+    B:{name:"Balanced Build",tag:"Walk",sum:"Quick wins plus the medium-effort moves — most of the payoff at a manageable pace.",trade:"The sensible middle: real impact without betting the whole quarter on one big build."},
+    C:{name:"Full Integration",tag:"Run",sum:"Everything you selected, including the heavy lifts — the maximum payoff on the table.",trade:"Highest return, but more time and spend up front and more running at once."}};
+  function card(key,d){
+    const m=meta[key],committed=state.coa===key,isRec=rec===key;
+    return `<article class="coacard ${committed?'committed':''} ${isRec?'rec':''}">
+      ${isRec?'<span class="rec-badge">Suited to your readiness</span>':''}
+      <div class="coa-tag">Course ${key}</div>
+      <h3>${m.name} <span>${m.tag}</span></h3>
+      <p class="coa-sum">${m.sum}</p>
+      <div class="coa-factors">
+        <div class="factor"><span class="flab">Cost</span><span class="fval">${d.moves.length?money(d.setupCost):"—"}<small>${d.moves.length?"setup · "+money(d.monthly)+"/mo tools":"no moves in this course"}</small></span></div>
+        <div class="factor"><span class="flab">Schedule</span><span class="fval">${d.moves.length?d.sched:"—"}<small>${d.moves.length?"~"+d.setupH+"h of setup work":"—"}</small></span></div>
+        <div class="factor"><span class="flab">Performance</span><span class="fval">${d.hrs} h/wk<small>${money(d.annual)}/yr · ${d.pct}% of full plan</small></span></div>
+        <div class="factor opp"><span class="flab">Opportunity cost</span><span class="fval">${d.deferred.length?money(d.defAnnual)+"/yr":"$0"}<small>${d.deferred.length?d.deferred.length+" move"+(d.deferred.length>1?"s":"")+" deferred for now":"nothing left on the table"}</small></span></div>
+      </div>
+      <p class="coa-trade">${m.trade}</p>
+      <button class="coa-commit" data-commit="${key}">${committed?"✓ Your chosen course":"Choose this course"}</button>
+    </article>`;
+  }
+  return `<div class="view-head"><div class="eyebrow">Stage 08 — The decision</div><h2>Courses of action</h2>
+    <p>Three ways to phase the same plan, side by side on the factors that drive the call: cost, schedule, performance and opportunity cost. Pick the one that fits your appetite — you can always step up later.</p></div>
+    <div class="card" style="margin-bottom:18px"><div class="callout warn"><span>!</span><div><strong>The cost of waiting.</strong> Doing none of this leaves roughly <strong>${money(c.fullAnnualGross)}/yr</strong> of reclaimable time on the table — that's the opportunity cost of standing still, before any course is chosen.</div></div></div>
+    <div class="coa">${card("A",c.A)}${card("B",c.B)}${card("C",c.C)}</div>
+    <p class="illus-note" style="text-align:left;margin-top:18px">Cost values your setup time at ${money(Number(state.profile.hourly)||0)}/hr and estimates ~$45/mo per specialist tool. Opportunity cost is the yearly value of the moves a course defers. Planning estimates, not quotes.</p>
+    <div class="nav-actions"><button class="pbtn ghost" onclick="go('roi')">← ROI</button><button class="pbtn" onclick="go('dashboard')">Back to snapshot →</button></div>`;}
+
+function viewDashboard(){const c=completion(),score=readinessScore(),p=state.profile;
+  const hours=state.roi.touched&&state.roi.hours!==null?state.roi.hours:sumSelected("hrs");
+  const annual=(hours*(Number(p.hourly)||0)*4.33-(Number(state.roi.tool)||0))*12;
+  const total=OPPS.filter(o=>state.selected.has(o.id)).length,goals=p.goals.length?p.goals:[];
+  if(!c.profile)return `<div class="view-head"><div class="eyebrow">Welcome</div><h2>Let's build your AI plan</h2>
+    <p>Groundwork AI walks you from a blank page to a costed, sequenced AI strategy in eight connected stages. Start with your business — every later stage reads from it.</p></div>
+    <div class="card"><h3 style="font-size:19px;font-family:Inter;color:var(--ink)">The eight stages, in order</h3>
+      <ol class="priolist" style="margin:14px 0 0;padding-left:20px;color:var(--text)">
+        <li><b>Profile</b> — who you are, your goals, your hourly cost.</li><li><b>Readiness</b> — a five-part score that sets your pace.</li>
+        <li><b>Strategy</b> — three priorities drawn from the two above.</li><li><b>Opportunity map</b> — concrete use cases you add to a plan.</li>
+        <li><b>Roadmap</b> — your picks, sequenced into phases.</li><li><b>Tool stack</b> — the named, best-in-class tools for each move.</li>
+        <li><b>ROI</b> — what the plan is worth in time and money.</li><li><b>Courses of action</b> — three ways to phase it, weighed on cost, schedule, performance and opportunity cost.</li></ol></div>
+    <div class="nav-actions"><span></span><button class="pbtn" onclick="go('profile')">Start with my profile →</button></div>`;
+  return `<div class="view-head"><div class="eyebrow">Snapshot</div><h2>${esc(p.name)||"Your"} AI plan</h2>
+    <p>${p.industry?p.industry+" · ":""}${p.size||""} ${goals.length?"· focused on "+goals.slice(0,2).join(" & ").toLowerCase():""}</p></div>
+  ${state.coa?`<div class="card" style="margin-bottom:18px;border-color:var(--accent-line)"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div><div class="eyebrow">Chosen course of action</div><h3 style="font-size:23px;margin-top:6px;font-family:'Playfair Display',serif">Course ${state.coa} — ${{A:"Quick Wins",B:"Balanced Build",C:"Full Integration"}[state.coa]}</h3></div>
+    <button class="addbtn" style="padding:8px 14px" onclick="go('coa')">Review courses</button></div></div>`:
+    (total?`<div class="card" style="margin-bottom:18px"><div class="callout"><span>◆</span><div>You've built a plan but haven't committed to a course yet. <button class="addbtn" style="padding:4px 10px;margin-left:4px" onclick="go('coa')">Weigh cost, schedule & opportunity cost →</button></div></div></div>`:"")}
+  <div class="kpis">
+    <div class="kpi"><small>Readiness</small><b>${score??"—"}${score!==null?'<span class="u">/100</span>':''}</b></div>
+    <div class="kpi"><small>In your plan</small><b>${total}<span class="u"> moves</span></b></div>
+    <div class="kpi"><small>Time back</small><b>${hours}<span class="u"> h/wk</span></b></div>
+    <div class="kpi"><small>Annual value</small><b style="color:var(--accent)">${annual>0?money(annual):"—"}</b></div></div>
+  <div class="grid g2">
+    <div class="card"><h3 style="font-size:18px;margin-bottom:12px;font-family:Inter;color:var(--ink)">Where you are</h3>
+      ${STEPS.filter(s=>s[0]!=="dashboard").map(([id,label])=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line-2)">
+        <span style="width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:11px;color:#1a0f06;background:${c[id]?'var(--accent)':'var(--line)'}">${c[id]?"✓":""}</span>
+        <span style="flex:1;font-weight:${c[id]?500:600};color:var(--ink)">${label}</span>
+        <button class="addbtn" style="padding:5px 11px;font-size:12.5px" onclick="go('${id}')">${c[id]?"Review":"Do this"}</button></div>`).join("")}</div>
+    <div class="card"><h3 style="font-size:18px;margin-bottom:12px;font-family:Inter;color:var(--ink)">Your next 3 moves</h3>
+      ${total?`<ol class="priolist" style="margin:0;padding-left:20px">${OPPS.filter(o=>state.selected.has(o.id)).sort((a,b)=>({Low:0,Med:1,High:2})[a.effort]-({Low:0,Med:1,High:2})[b.effort]).slice(0,3).map(o=>`<li><b>${o.title}</b><br><span class="seq">${o.fn} · ${o.effort} effort · ~${o.hrs}h/wk</span></li>`).join("")}</ol>
+      <button class="pbtn ghost" style="margin-top:16px;padding:10px 16px" onclick="go('roadmap')">Open full roadmap →</button>`:'<div class="empty">Add opportunities to your plan to see your next moves.</div>'}</div></div>`;}
+
+function viewCatalog(){
+  return `<div class="view-head"><div class="eyebrow">Reference — the toolbox</div><h2>AI tool catalog</h2>
+    <p>Every notable AI tool for small business, by category, each weighed on the same lens as your plan: cost, schedule and performance. Search or filter, then add the ones that fit on the opportunity map. Pricing is approximate (mid-2026) and changes often — verify before you buy.</p></div>
+  <input type="text" id="cat-search" class="cat-search" placeholder="Search tools — e.g. receptionist, Shopify, bookkeeping…">
+  <div class="filters" id="cat-chips">${CAT_CATS.map(c=>`<button class="chip" aria-pressed="${catFilter===c}" data-cat="${esc(c)}">${c}</button>`).join("")}</div>
+  <p class="cat-count" id="cat-count"></p>
+  <div class="catgrid" id="cat-results"></div>
+  <div class="nav-actions"><button class="pbtn ghost" onclick="go('dashboard')">← Snapshot</button>${state.selected.size?`<button class="pbtn" onclick="go('stack')">Your shortlist →</button>`:`<button class="pbtn" onclick="go('opportunities')">Pick your moves →</button>`}</div>`;}
+
+function renderCatalogResults(){
+  const box=$("#cat-results");if(!box)return;
+  const q=(($("#cat-search")||{}).value||"").trim().toLowerCase();
+  const list=CATALOG.filter(t=>(catFilter==="All"||t[0]===catFilter)&&(!q||(t[1]+" "+t[2]+" "+t[6]+" "+t[7]+" "+t[0]).toLowerCase().includes(q)));
+  const cc=$("#cat-count");if(cc)cc.textContent=list.length+" of "+CATALOG.length+" tools"+(catFilter!=="All"?" in "+catFilter:"")+(q?` matching “${q}”`:"");
+  box.innerHTML=list.length?list.map(t=>`<div class="catcard">
+    <div class="fn">${t[0]}</div><h4>${t[1]}</h4><p class="best">${t[2]}</p>
+    <div class="csp"><div><div class="l">Cost</div><div class="v">${t[3]}</div></div><div><div class="l">Schedule</div><div class="v">${t[5]}</div></div></div>
+    <p class="catperf"><b>Does:</b> ${t[6]}</p>
+    <p class="catnote">${t[7]} · <span style="opacity:.75">${t[4]}</span></p>
+  </div>`).join(""):`<div class="empty" style="grid-column:1/-1">No tools match that search. Try a broader term or another category.</div>`;
+}
+
+function notReady(t,h,d){return `<div class="view-head"><div class="eyebrow">Locked</div><h2>${h}</h2><p>${d}</p></div>
+  <div class="card"><div class="empty">This stage builds on an earlier one.</div></div>
+  <div class="nav-actions"><span></span><button class="pbtn" onclick="go('${t}')">Go there →</button></div>`;}
+
+function render(){renderNav();const v=state.view;
+  const html=v==="profile"?viewProfile():v==="readiness"?viewReadiness():v==="strategy"?viewStrategy()
+    :v==="opportunities"?viewOpportunities():v==="roadmap"?viewRoadmap():v==="stack"?viewStack():v==="roi"?viewROI():v==="coa"?viewCOA():v==="catalog"?viewCatalog():viewDashboard();
+  $("#canvas").innerHTML=html;wire();}
+
+function wire(){
+  const n=$("#f-name");if(n)n.oninput=e=>{state.profile.name=e.target.value;renderNav();};
+  const ind=$("#f-ind");if(ind)ind.onchange=e=>{state.profile.industry=e.target.value;renderNav();};
+  const sz=$("#f-size");if(sz)sz.onchange=e=>{state.profile.size=e.target.value;};
+  const hr=$("#f-hr");if(hr)hr.oninput=e=>{state.profile.hourly=e.target.value;};
+  const g=$("#f-goals");if(g)g.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{const gg=b.dataset.g,i=state.profile.goals.indexOf(gg);if(i>=0)state.profile.goals.splice(i,1);else state.profile.goals.push(gg);b.setAttribute("aria-pressed",i<0);renderNav();});
+  document.querySelectorAll(".levels").forEach(grp=>grp.querySelectorAll("button").forEach(b=>b.onclick=()=>{state.readiness[grp.dataset.dim]=Number(b.dataset.v);render();}));
+  document.querySelectorAll("[data-fn]").forEach(b=>b.onclick=()=>{oppFilter=b.dataset.fn;render();});
+  document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{const id=b.dataset.add;if(state.selected.has(id))state.selected.delete(id);else state.selected.add(id);state.roi.touched=false;render();});
+  document.querySelectorAll("[data-task]").forEach(c=>c.onchange=()=>{const id=c.dataset.task;if(c.checked)state.tasksDone.add(id);else state.tasksDone.delete(id);render();});
+  const rh=$("#roi-hours");if(rh)rh.oninput=e=>{state.roi.hours=Number(e.target.value);state.roi.touched=true;render();};
+  const rhr=$("#roi-hourly");if(rhr)rhr.oninput=e=>{state.profile.hourly=e.target.value;render();};
+  document.querySelectorAll("[data-commit]").forEach(b=>b.onclick=()=>{state.coa=b.dataset.commit;render();});
+  if(state.view==="catalog"){
+    const s=$("#cat-search");if(s)s.oninput=()=>renderCatalogResults();
+    document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{catFilter=b.dataset.cat;document.querySelectorAll("[data-cat]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===catFilter));renderCatalogResults();});
+    renderCatalogResults();
+  }
+  const rt=$("#roi-tool");if(rt)rt.oninput=e=>{state.roi.tool=Number(e.target.value);render();};
+}
+
+/* ---------- landing wiring ---------- */
+function buildLanding(){
+  // inject icons
+  document.querySelectorAll(".flame").forEach(e=>e.innerHTML=FLAME.replace('width="100%" height="100%"',''));
+  const repl=[["__ICON_HAND__",ICONS.hand],["__ICON_SPARK__",ICONS.spark],["__CI_PHONE__",ICONS.phone],["__CI_DOC__",ICONS.doc],
+    ["__CI_LOOP__",ICONS.loop],["__CI_COIN__",ICONS.coin],["__CI_MEGA__",ICONS.mega],["__CI_MAP__",ICONS.map]];
+  document.querySelectorAll(".ic-tile,.ci").forEach(el=>{repl.forEach(([k,v])=>{if(el.textContent.trim()===k)el.innerHTML=v;});});
+  // stage grid
+  const sg=[["I","Profile","Your business, goals and hourly cost — the source for everything."],
+    ["II","Readiness","A five-part score that sets a realistic pace for your plan."],
+    ["III","Strategy","Three priorities drawn from your goals and readiness tier."],
+    ["IV","Opportunity map","Concrete AI use cases you add to a working plan."],
+    ["V","Roadmap","Your picks, sequenced into quick wins, foundations and scale."],
+    ["VI","Tool stack","The named, best-in-class AI tools behind every move you choose."],
+    ["VII","ROI","Hours and dollars the plan gives back, calculated for you."],
+    ["VIII","Courses of action","Three ways to phase it — weighed on cost, schedule, performance and opportunity cost, then committed."]];
+  $("#stage-grid").innerHTML=sg.map(([n,h,p])=>`<div class="stage"><div class="num">${n}</div><h4>${h}</h4><p>${p}</p></div>`).join("");
+  $("#tool-chips").innerHTML=Object.values(TOOLS).map(t=>`<div class="tchip"><b>${t.name}</b><span>${t.bestFor}</span></div>`).join("");
+  // enter buttons
+  document.querySelectorAll("[data-enter]").forEach(b=>b.onclick=()=>enterApp(b.dataset.enter));
+  $("#go-home").onclick=e=>{e.preventDefault();goHome();};
+  // nav scroll state + smooth anchors
+  const nav=$("#topnav");
+  window.addEventListener("scroll",()=>{nav.classList.toggle("scrolled",window.scrollY>40);},{passive:true});
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{
+    const id=a.getAttribute("href");if(id.length>1){const t=document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth"});}}}));
+  // count-up
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const io=new IntersectionObserver((ents)=>{ents.forEach(en=>{if(!en.isIntersecting)return;
+    const el=en.target,target=Number(el.dataset.count),suf=el.dataset.suffix||"";
+    const unit=el.querySelector(".unit");const unitHTML=unit?unit.outerHTML:"";
+    if(reduce){el.firstChild&&(el.childNodes[0].nodeValue=target+suf);io.unobserve(el);return;}
+    let cur=0;const dur=900,t0=performance.now();
+    const tick=(t)=>{const k=Math.min(1,(t-t0)/dur);cur=Math.round((target)*(1-Math.pow(1-k,3)));
+      el.innerHTML=cur+suf+unitHTML;if(k<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);io.unobserve(el);});},{threshold:.5});
+  document.querySelectorAll("[data-count]").forEach(el=>io.observe(el));
+}
+
+/* fix back-icon injection */
+document.addEventListener("DOMContentLoaded",()=>{
+  $("#go-home").innerHTML=ICONS.back+" Back to home";
+  buildLanding();
+});
+</script>
+</body>
+</html>
